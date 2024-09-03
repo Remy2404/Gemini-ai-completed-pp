@@ -1,0 +1,299 @@
+.homepage {
+  display: flex;
+  align-items: center;
+  gap: 100px;
+  position: relative;
+  height: 100%;
+
+  @media screen and (max-width: 1024px) {
+    flex-direction: column;
+    gap: 0px;
+  }
+
+  .left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    text-align: center;
+
+    h1 {
+      font-size: 128px;
+      background: linear-gradient(to right, #217bfe, #e55571);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+
+      @media screen and (max-width: 1280px) {
+        font-size: 64px;
+      }
+    }
+    h3 {
+      font-weight: 400;
+      max-width: 70%;
+
+      @media screen and (max-width: 1024px) {
+        max-width: 100%;
+      }
+    }
+    /* From Uiverse.io by AlimurtuzaCodes */ 
+    .a {
+      border: none;
+      width: 15em;
+      height: 5em;
+      border-radius: 3em;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      background: #1C1A1C;
+      cursor: pointer;
+      transition: all 450ms ease-in-out;
+    }
+
+    .sparkle {
+      fill: #AAAAAA;
+      transition: all 800ms ease;
+    }
+
+    .text {
+      font-weight: 600;
+      color: #AAAAAA;
+      font-size: medium;
+    }
+
+    .a:hover {
+      background: linear-gradient(0deg,#A47CF3,#683FEA);
+      box-shadow: inset 0px 1px 0px 0px rgba(255, 255, 255, 0.4),
+      inset 0px -4px 0px 0px rgba(0, 0, 0, 0.2),
+      0px 0px 0px 4px rgba(255, 255, 255, 0.2),
+      0px 0px 180px 0px #9917FF;
+      transform: translateY(-2px);
+    }
+
+    .a:hover .text {
+      color: white;
+    }
+
+    .a:hover .sparkle {
+      fill: white;
+      transform: scale(1.2);
+    } 
+    
+    @keyframes shine {
+      0% {
+        left: -100px;
+      }
+    
+      60% {
+        left: 100%;
+      }
+    
+      to {
+        left: 100%;
+      }
+    }
+  }
+  .right {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+
+    .imgContainer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #140e2d;
+      border-radius: 50px;
+      width: 80%;
+      height: 50%;
+      position: relative;
+
+      .bgContainer {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        position: absolute;
+        top: 0;
+        left: 0;
+        border-radius: 50px;
+
+        .bg {
+          background-image: url("/bg.png");
+          opacity: 0.2;
+          width: 200%;
+          height: 100%;
+          background-size: auto 100%;
+          animation: 8s ease-in-out infinite alternate slideBg;
+        }
+      }
+
+      .bot {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        animation: 3s ease-in-out infinite alternate botAnimate;
+      }
+
+      .chat {
+        position: absolute;
+        bottom: -30px;
+        right: -50px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 20px;
+        background-color: #2c2937;
+        border-radius: 10px;
+
+        @media screen and (max-width: 1024px) {
+          display: none;
+        }
+
+        @media screen and (max-width: 1280px) {
+          right: 0;
+        }
+
+        img {
+          width: 32px;
+          height: 32px;
+          border-radius: 50%;
+          object-fit: cover;
+        }
+      }
+    }
+  }
+
+  .orbital {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    opacity: 0.05;
+    animation: 100s linear infinite rotateOrbital;
+    z-index: -1;
+  }
+
+  .terms {
+    position: absolute;
+    bottom: -1px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+
+    img {
+      width: 16px;
+      height: 16px;
+    }
+
+    .links {
+      display: flex;
+      gap: 10px;
+      color: #888;
+      font-size: 10px;
+    }
+  }
+  .footer-wrapper {
+    position:absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+  
+  }
+
+  .footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 0;
+    background-color: #140e2d;
+
+    /* From Uiverse.io by Lokesh1379 */
+    .parent {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .child {
+      width: 50px;
+      height: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transform-style: preserve-3d;
+      transition: all 0.5s ease-in-out;
+      border-radius: 50%;
+      margin: 0 5px;
+    }
+    
+    .child:hover {
+      background-color: white;
+      background-position: -100px 100px, -100px 100px;
+      transform: rotate3d(0.5, 1, 0, 30deg);
+      transform: perspective(180px) rotateX(60deg) translateY(2px);
+      box-shadow: 0px 10px 10px rgb(1, 49, 182);
+    }
+    
+    button {
+      border: none;
+      background-color: transparent;
+      font-size: 20px;
+    }
+    
+    .button:hover {
+      width: inherit;
+      height: inherit;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transform: translate3d(0px, 0px, 15px) perspective(180px) rotateX(-35deg) translateY(2px);
+      border-radius: 50%;
+    }
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .homepage {
+    .footer-wrapper {
+      position: relative;
+      margin-top: 60px;
+    }
+  }
+}
+
+@keyframes rotateOrbital {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(60deg);
+  }
+}
+
+@keyframes botAnimate {
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+  100% {
+    transform: scale(1.1) rotate(-5deg);
+  }
+}
+
+@keyframes slideBg {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
