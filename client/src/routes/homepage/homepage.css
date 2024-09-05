@@ -141,14 +141,16 @@
 
       .chat {
         position: absolute;
-        bottom: -30px;
-        right: -50px;
+        bottom: -70px;
+        right: -60px;
         display: flex;
         align-items: center;
+        border-bottom-right-radius: 10%;
         gap: 10px;
-        padding: 20px;
+        padding: 10px;
         background-color: #2c2937;
-        border-radius: 10px;
+        border-radius: 30px;
+        border: #AAAAAA;
 
         @media screen and (max-width: 1024px) {
           display: none;

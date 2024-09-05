@@ -15,7 +15,7 @@ const ChatList = () => {
     <div className="chatList">
       <span className="title">DASHBOARD</span>
       <Link to="/dashboard">Create a new Chat</Link>
-      <Link to="/">Explore Ginimi AI</Link>
+      <Link to="/">Explore Gimini AI</Link>
       <Link to="/">Contact</Link>
       <hr />
       <span className="title">RECENT CHATS</span>
@@ -32,9 +32,9 @@ const ChatList = () => {
       </div>
       <hr />
       <div className="upgrade">
-        <img src="/logo_app.png" alt="logo" />
+        <img src="/logo_app.png" alt="" />
         <div className="texts">
-          <span>Upgrade to Gimini AI Pro</span>
+          <span>Upgrade to Gimini  AI Pro</span>
           <span>Get unlimited access to all features</span>
         </div>
       </div>

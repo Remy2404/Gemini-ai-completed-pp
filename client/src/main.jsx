@@ -9,6 +9,7 @@ import RootLayout from "./layouts/rootLayout/RootLayout";
 import DashboardLayout from "./layouts/dashboardLayout/DashboardLayout";
 import SignInPage from "./routes/signInPage/signInPage";
 import SignUpPage from "./routes/signUpPage/signUpPage";
+import Main_content from "./layouts/rootLayout/Main_content";
 
 const router = createBrowserRouter([
   {
@@ -16,25 +17,31 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Homepage />,
+        element: (
+          <>
+            <Homepage />
+            <Main_content />
+          </>
+        ),
       },
       {
-        path: "/sign-in/*",
+        path: "sign-in",
         element: <SignInPage />,
       },
       {
-        path: "/sign-up/*",
+        path: "sign-up",
         element: <SignUpPage />,
       },
       {
+        path: "dashboard",
         element: <DashboardLayout />,
         children: [
           {
-            path: "/dashboard",
+            index: true,
             element: <DashboardPage />,
           },
           {
-            path: "/dashboard/chats/:id",
+            path: "chats/:id",
             element: <ChatPage />,
           },
         ],

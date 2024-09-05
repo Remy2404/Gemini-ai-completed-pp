@@ -8,8 +8,8 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const NewPrompt = ({ data }) => {
   const [question, setQuestion] = useState("");
-  const [answer, setAnswer] = useState("");
-  const [img, setImg] = useState({
+   const [answer, setAnswer] = useState("");
+   const [img, setImg] = useState({
     isLoading: false,
     error: "",
     dbData: {},
@@ -20,7 +20,7 @@ const NewPrompt = ({ data }) => {
     history: data?.history?.length
       ? data.history.map(({ role, parts }) => ({
           role,
-          parts: parts.map(part => ({ text: part.text }))
+          parts: parts.map((part) => ({ text: part.text })),
         }))
       : [{ role: "user", parts: [{ text: "Hello" }] }],
     generationConfig: {
@@ -132,6 +132,8 @@ const NewPrompt = ({ data }) => {
           <Markdown>{answer}</Markdown>
         </div>
       )}
+
+      {/* Chat Input Form */}
       <div className="endChat" ref={endRef}></div>
       <form className="newForm" onSubmit={handleSubmit} ref={formRef}>
         <Upload setImg={setImg} />

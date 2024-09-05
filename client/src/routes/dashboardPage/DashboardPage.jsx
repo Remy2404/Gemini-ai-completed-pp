@@ -36,8 +36,8 @@ const DashboardPage = () => {
     <div className="dashboardPage">
       <div className="texts">
         <div className="logo">
-          <img src="/logo.png" alt="logo" />
-          <h1>GIMINI AI</h1>
+          <img src="/logo_app.png" alt="logo" />
+          <h1>Gimini AI</h1>
         </div>
         <div className="options">
           <div className="option">
@@ -58,7 +58,7 @@ const DashboardPage = () => {
         <form onSubmit={handleSubmit}>
           <input type="text" name="text" placeholder="Ask me anything..." />
           <button>
-            <img src="/arrow.png" alt="" />
+            <img src="/arrow.png" alt="logo" />
           </button>
         </form>
       </div>

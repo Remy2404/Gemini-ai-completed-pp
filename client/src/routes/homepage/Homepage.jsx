@@ -1,8 +1,8 @@
+import React from "react";
 import { Link } from "react-router-dom";
 import "./homepage.css";
 import { TypeAnimation } from "react-type-animation";
 import { useState } from "react";
-import Footer from "./Footer";
 
 const Homepage = () => {
   const [typingStatus, setTypingStatus] = useState("human1");
@@ -71,16 +71,6 @@ const Homepage = () => {
               omitDeletionAnimation={true}
             />
           </div>
-        </div>
-      </div>
-      <Footer />
-      <div className="terms">
-        <img src="/logo_app.png" alt="" />
-        <div className="links">
-
-          <Link to="/">Terms of Service</Link>
-          <span>|</span>
-          <Link to="/">Privacy Policy</Link>
         </div>
       </div>
     </div>
