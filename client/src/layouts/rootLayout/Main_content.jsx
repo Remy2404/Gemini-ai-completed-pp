@@ -168,14 +168,14 @@ We believe that AI should be accessible, transparent, and beneficial to all. Tha
                   <AvatarImage src="/Ramy.jpg" alt="Team Member 1" />
                   <AvatarFallback>TM1</AvatarFallback>
                 </Avatar>
-                <div className="grid gap-1 text-center">
+                <div className="grid gap-1 text-center rounded-md hover:border-white">
                   <h3 className="text-xl font-bold">Phon Ramy</h3>
                   <p className="text-muted-foreground">Co-Founder & CEO</p>
                 </div>
               </div>
               <div className="flex flex-col items-center justify-center space-y-4">
-                <Avatar className="w-20 h-20">
-                  <AvatarImage src="/Ramy.jpg" alt="Team Member 2" />
+                <Avatar className="w-20 h-20 rounded border-10px hue-rotate-15 hover:border-gray-200 border-x-white">
+                  <AvatarImage src="/Heng.png" alt="Team Member 2" />
                   <AvatarFallback>TM2</AvatarFallback>
                 </Avatar>
                 <div className="grid gap-1 text-center">
@@ -229,7 +229,7 @@ We believe that AI should be accessible, transparent, and beneficial to all. Tha
         <div className="container px-4 md:px-6">
           <div className="flex flex-col items-center justify-between gap-4 text-center md:flex-row">
             <p className="text-sm leading-loose text-muted-foreground">
-              Built with ❤ by <a href="https://nextjs.org" className="font-semibold">Next.js</a> and <a href="https://tailwindcss.com" className="font-semibold">Tailwind CSS</a>
+              Built with ❤ by <a href="" className="font-semibold">Ramy</a>
             </p>
             <div className=" justify-center flex gap-4">
               <a href="#" className="text-sm font-medium hover:underline underline-offset-4">
