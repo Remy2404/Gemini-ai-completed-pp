@@ -18,6 +18,11 @@
         {
             "src": "/(.*)",
             "dest": "../client/dist/index.html"
+        },
+        {
+            "src": "(.*)",
+            "dest": "/api/$1",
+            "status": 200
         }
     ]
 }
