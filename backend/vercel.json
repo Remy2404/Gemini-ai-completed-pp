@@ -2,14 +2,35 @@
     "version": 2,
     "builds": [
       {
-        "src": "api/index.js",
+        "src": "index.js",
         "use": "@vercel/node"
       }
     ],
     "routes": [
       {
+        "src": "/api/upload",
+        "dest": "/index.js"
+      },
+      {
+        "src": "/api/chats",
+        "dest": "/index.js"
+      },
+      {
+        "src": "/api/userchats",
+        "dest": "/index.js"
+      },
+      {
+        "src": "/api/chats/:id",
+        "dest": "/index.js"
+      },
+      {
+        "src": "/api/chats/:id",
+        "methods": ["PUT"],
+        "dest": "/index.js"
+      },
+      {
         "src": "/(.*)",
-        "dest": "/api/index.js"
+        "dest": "/index.html"
       }
     ]
   }
