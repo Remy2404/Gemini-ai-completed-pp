@@ -1,37 +1,51 @@
 {
-    "version": 2,
-    "builds": [
-      {
-        "src": "index.js",
-        "use": "@vercel/node"
+  "version": 2,
+  "builds": [
+    {
+      "src": "index.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "client/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "client/dist"
       }
-    ],
-    "routes": [
-      {
-        "src": "/api/upload",
-        "dest": "/index.js"
-      },
-      {
-        "src": "/api/chats",
-        "dest": "/index.js"
-      },
-      {
-        "src": "/api/userchats",
-        "dest": "/index.js"
-      },
-      {
-        "src": "/api/chats/:id",
-        "dest": "/index.js"
-      },
-      {
-        "src": "/api/chats/:id",
-        "methods": ["PUT"],
-        "dest": "/index.js"
-      },
-      {
-        "src": "/(.*)",
-        "dest": "/index.html"
-      }
-    ]
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/upload",
+      "dest": "/index.js"
+    },
+    {
+      "src": "/api/chats",
+      "dest": "/index.js"
+    },
+    {
+      "src": "/api/userchats",
+      "dest": "/index.js"
+    },
+    {
+      "src": "/api/chats/:id",
+      "dest": "/index.js"
+    },
+    {
+      "src": "/api/chats/:id",
+      "methods": ["PUT"],
+      "dest": "/index.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/client/dist/$1"
+    }
+  ],
+  "env": {
+    "PORT": "3000",
+    "CLIENT_URL": "http://localhost:5173",
+    "MONGO": "mongodb+srv://ramy_db:Ramy2404RM$@cluster1.rs58g.mongodb.net/chat?retryWrites=true&w=majority&appName=Cluster1",
+    "IMAGE_KIT_ENDPOINT": "https://ik.imagekit.io/2ewctlnv6",
+    "IMAGE_KIT_PUBLIC_KEY": "public_L/6uR9D4jqjRFR2z/8KZKOd32aY=",
+    "IMAGE_KIT_PRIVATE_KEY": "private_j8C4mGDgiv4umb/FP7+hbbtLfCc="
   }
-  
+}

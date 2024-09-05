@@ -1,15 +1,30 @@
 {
     "version": 2,
     "builds": [
-        {
-            "src": "*.jsx",
-            "use": "@vercel/node"
+      {
+        "src": "backend/index.js",
+        "use": "@vercel/node"
+      },
+      {
+        "src": "client/vite.config.js",
+        "use": "@vercel/static",
+        "config": {
+          "rootDirectory": "client",
+          "build": {
+            "outDir": "dist",
+            "publicDirectory": "public"
+          }
         }
+      }
     ],
     "routes": [
-        {
-            "src": "/(.*)",
-            "dest": "/"
-        }
+      {
+        "src": "/api/(.*)",
+        "dest": "http://localhost:3000/api/$1"
+      },
+      {
+        "src": "/(.*)",
+        "dest": "client/dist/$1"
+      }
     ]
-}
+  }
