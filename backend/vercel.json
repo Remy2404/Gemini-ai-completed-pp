@@ -2,28 +2,15 @@
     "version": 2,
     "builds": [
       {
-        "src": "index.js",
+        "src": "api/index.js",
         "use": "@vercel/node"
       }
     ],
     "routes": [
       {
-        "src": "/api/(.*)",
-        "dest": "/index.js"
-      },
-      {
         "src": "/(.*)",
-        "dest": "/client/dist/index.html"
+        "dest": "/api/index.js"
       }
-    ],
-    "env": {
-      "PORT": "3000",
-      "MONGO": "@mongo_connection_string",
-      "IMAGE_KIT_ENDPOINT": "@image_kit_endpoint",
-      "IMAGE_KIT_PUBLIC_KEY": "@image_kit_public_key",
-      "IMAGE_KIT_PRIVATE_KEY": "@image_kit_private_key",
-      "CLERK_API_KEY": "@clerk_api_key",
-      "CLIENT_URL": "@client_url"
-    }
+    ]
   }
   
