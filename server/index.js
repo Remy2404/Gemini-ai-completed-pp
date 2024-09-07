@@ -14,7 +14,7 @@ const app = express();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
+const CLIENT_URL = "https://client-uc9l.onrender.com";
 const corsOptions = {
   origin : process.env.CLIENT_URL,
 credentials: true,
