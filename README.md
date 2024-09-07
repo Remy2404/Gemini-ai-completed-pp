@@ -1,10 +1,8 @@
 ```markdown
-### Welcome to Your React Chat Bot Project!
-
-#### Project Overview
+#### **Project Overview**
 You've just cloned a minimal setup template for creating a React 19 chat bot application. This project leverages Vite for development, ensuring fast code updates with Hot Module Replacement (HMR). It also includes ESLint rules to maintain code quality and consistency.
 
-#### Getting Started
+#### **Getting Started**
 To get your development environment up and running, follow these steps:
 1. **Navigate to the project folder:**
    ```sh
