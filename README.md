@@ -5,7 +5,6 @@ You've just cloned a minimal setup template for creating a React 19 chat bot app
 #### **Getting Started**
 To get your development environment up and running, follow these steps:
 1. **Navigate to the project folder:**
-   ```sh
    cd chatgpt-clone-completed-pp/client
    ```
 2. **Install dependencies:**
