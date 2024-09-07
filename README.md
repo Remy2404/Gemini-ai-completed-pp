@@ -1,5 +1,38 @@
 
-```markdown
+# Chat Bot Application
+
+![Build Status](https://img.shields.io/badge/build-passing-brightgreen)
+![License](https://img.shields.io/badge/license-MIT-blue)
+
+#### **Project Overview**
+You've just cloned a minimal setup template for creating a React 18 chat bot application. This project leverages Vite for development, ensuring fast code updates with Hot Module Replacement (HMR). It also includes ESLint rules to maintain code quality and consistency.
+
+## Table of Contents
+1. Project Overview
+2. Getting Started
+3. Key Components
+4. Important Scripts
+5. Project Structure
+6. Notable Aspects
+7. Next Steps
+8. Contributing
+9. License
+
+## Getting Started
+
+### Prerequisites
+Ensure you have the following installed:
+- Node.js (>=14.x)
+- npm or yarn
+
+### Installation
+To get your development environment up and running, follow these steps:
+
+``` 
+1. **Navigate to the project folder:**
+   ```sh
+   cd chatgpt-clone-completed-pp/client
+   ```
 
 2. **Install dependencies:**
    ```sh
