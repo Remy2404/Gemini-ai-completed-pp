@@ -11,7 +11,7 @@ const Homepage = () => {
     <div className="homepage">
       <img src="/orbital.png" alt="" className="orbital" />
       <div className="left">
-        <h1>GIMINI AI</h1>
+        <h1>GEMINI AI</h1>
         <h2>Supercharge your creativity and productivity</h2>
         <h3>
           Unleash the power of AI to transform your ideas into reality 

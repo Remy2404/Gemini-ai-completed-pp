@@ -27,42 +27,42 @@ export default function Component() {
                 <BoltIcon className="w-10 h-10 text-sky-500" />
                 <h3 className="text-2xl font-bold">Blazing Fast</h3>
                 <p className="text-muted-foreground">
-                  Gimini AI responds instantly, so you can get the information you need in real-time.
+                  Gemini AI responds instantly, so you can get the information you need in real-time.
                 </p>
               </div>
               <div className="grid gap-4 items-start">
                 <SettingsIcon className="w-10 h-10 text-sky-500 " />
                 <h3 className="text-2xl font-bold">Highly Customizable</h3>
                 <p className="text-muted-foreground">
-                  Tailor Gimini AI to your specific needs with a wide range of configuration options.
+                  Tailor Gemini AI to your specific needs with a wide range of configuration options.
                 </p>
               </div>
               <div className="grid gap-4 items-start">
                 <LightbulbIcon className="w-10 h-10 text-sky-500" />
                 <h3 className="text-2xl font-bold">Innovative Features</h3>
                 <p className="text-muted-foreground">
-                  Gimini AI is constantly evolving, with new features and capabilities added regularly.
+                  Gemini AI is constantly evolving, with new features and capabilities added regularly.
                 </p>
               </div>
               <div className="grid gap-4 items-start">
                 <CodeIcon className="w-10 h-10 text-sky-500" />
                 <h3 className="text-2xl font-bold">Developer Friendly</h3>
                 <p className="text-muted-foreground">
-                  Integrate Gimini AI seamlessly into your applications with our powerful API.
+                  Integrate Gemini AI seamlessly into your applications with our powerful API.
                 </p>
               </div>
               <div className="grid gap-4 items-start">
                 <ShieldIcon className="w-10 h-10 text-sky-500" />
                 <h3 className="text-2xl font-bold">Secure and Private</h3>
                 <p className="text-muted-foreground">
-                  Your data is safe with Gimini AI, with industry-leading security and privacy measures.
+                  Your data is safe with Gemini AI, with industry-leading security and privacy measures.
                 </p>
               </div>
               <div className="grid gap-4 items-start">
                 <HeadphonesIcon className="w-10 h-10 text-sky-500" />
                 <h3 className="text-2xl font-bold">Exceptional Support</h3>
                 <p className="text-muted-foreground">
-                  Our dedicated support team is here to help you get the most out of Gimini AI.
+                  Our dedicated support team is here to help you get the most out of Gemini AI.
                 </p>
               </div>
             </div>
@@ -74,14 +74,14 @@ export default function Component() {
             <div>
               <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Pricing</h2>
               <p className="mt-4 text-white">
-                Gimini AI offers flexible pricing plans to suit your needs. Choose the plan that works best for you and
+                Gemini AI offers flexible pricing plans to suit your needs. Choose the plan that works best for you and
                 unlock the full potential of our AI assistant.
               </p>
               <div className="mt-8 grid gap-6">
                 <Card>
                   <CardHeader>
                     <CardTitle>Free</CardTitle>
-                    <CardDescription className="font-mono font-semibold">Get started with Gimini AI</CardDescription>
+                    <CardDescription className="font-mono font-semibold">Get started with Gemini AI</CardDescription>
                   </CardHeader>
                   <CardContent>
                     <div className="flex items-baseline justify-center gap-2">
@@ -110,7 +110,7 @@ export default function Component() {
                 <Card>
                   <CardHeader>
                     <CardTitle className="font-bold">Pro</CardTitle>
-                    <CardDescription className="font-mono font-semibold" >Unlock the full potential of Gimini AI</CardDescription>
+                    <CardDescription className="font-mono font-semibold" >Unlock the full potential of Gemini AI</CardDescription>
                   </CardHeader>
                   <CardContent>
                     <div className="flex items-baseline justify-center gap-2">
@@ -142,10 +142,10 @@ export default function Component() {
             <div class="card">
  <img src="/bot_love.png" alt="ailogo" />
   <div className="card__content">
-    <p className="card__title font-semibold">ABOUT GIMINI AI</p>
+    <p className="card__title font-semibold">ABOUT Gemini AI</p>
     <p className="card__description font-serif ">
-Gimini AI is a cutting-edge conversational AI assistant developed by a team of experts in natural language processing and machine learning. Our mission is to empower individuals and businesses with the tools they need to thrive in the digital age.
-We believe that AI should be accessible, transparent, and beneficial to all. That's why we've built Gimini AI with a focus on user-friendliness, ethical principles, and continuous improvement.</p>
+Gemini AI is a cutting-edge conversational AI assistant developed by a team of experts in natural language processing and machine learning. Our mission is to empower individuals and businesses with the tools they need to thrive in the digital age.
+We believe that AI should be accessible, transparent, and beneficial to all. That's why we've built Gemini AI with a focus on user-friendliness, ethical principles, and continuous improvement.</p>
   </div>
 </div>
             </div>
@@ -155,7 +155,7 @@ We believe that AI should be accessible, transparent, and beneficial to all. Tha
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">Meet the Gimini AI Team</h2>
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">Meet the Gemini AI Team</h2>
                 <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
                   Our talented team of AI experts and engineers are dedicated to pushing the boundaries of what's
                   possible with conversational AI.
