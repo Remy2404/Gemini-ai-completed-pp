@@ -28,7 +28,6 @@ Ensure you have the following installed:
 ### Installation
 To get your development environment up and running, follow these steps:
 
-``` 
 1. **Navigate to the project folder:**
    ```sh
    cd chatgpt-clone-completed-pp/client
