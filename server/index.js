@@ -7,6 +7,7 @@ import mongoose from "mongoose";
 import Chat from "./models/chat.js";
 import UserChats from "./models/userChats.js";
 import { ClerkExpressRequireAuth } from "@clerk/clerk-sdk-node";
+import fs from "fs";
 
 const port = process.env.PORT || 3000;
 const app = express();
@@ -154,11 +155,15 @@ app.use((err, req, res, next) => {
 });
 
 // PRODUCTION
-app.use(express.static(path.join(__dirname, "../client/dist")));
-
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/dist", "index.html"));
-});
+const clientPath = path.join(__dirname, "../client/dist");
+if (fs.existsSync(clientPath)) {
+  app.use(express.static(clientPath));
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(clientPath, "index.html"));
+  });
+} else {
+  console.warn("Client build not found. Skipping static file serving.");
+}
 
 app.listen(port, () => {
   connect();
