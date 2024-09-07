@@ -3,7 +3,7 @@ import "./rootLayout.css";
 import { ClerkProvider, SignedIn, UserButton } from "@clerk/clerk-react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Main_content from './Main_content';
-import HomePage from './../../routes/homepage/Homepage.jsx';
+import HomePage from '../../routes/homepage/Homepage.jsx';
 import DashboardPage from "@/routes/dashboardPage/DashboardPage";
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
