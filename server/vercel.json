@@ -2,17 +2,17 @@
     "version": 2,
     "builds": [
       {
-        "src": "server/index.js",
+        "src": "server.js",
         "use": "@vercel/node"
       }
     ],
     "routes": [
       {
         "src": "/(.*)",
-        "dest": "/server/index.js"
+        "dest": "/index.js"
       }
     ],
     "scripts": {
-      "start": "nodemon server/index.js"
+      "start": "nodemon index.js"
     }
 }
