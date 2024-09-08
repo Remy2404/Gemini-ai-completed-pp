@@ -43,6 +43,27 @@ const imagekit = new ImageKit({
 // Use Clerk middleware for authentication
 app.use(ClerkExpressWithAuth());
 
+// Upload image middleware
+app.post("/api/upload", (req, res) => {
+  const { signature, expire, token } = req.body;
+  res.send({ signature, expire, token });
+});
+//rewrite rule 
+app.use((req, res, next) => {
+  const newPath = req.path.replace("/api", "");
+  req.url = newPath;
+  next();
+  // Continue to the next middleware or route handler:
+  const filePath = path.join(__dirname, "client", "build", newPath);
+  if (fs.existsSync(filePath)) {
+    res.sendFile(filePath);
+  } else {
+    next();
+  }
+
+  // For example, you could redirect to a login page if the user is not authenticated
+});
+
 // Routes
 app.get("/", (req, res) => {
   res.send("Welcome to the API");
@@ -179,10 +200,10 @@ app.use((err, req, res, next) => {
 });
 
 // Serve static files in production
-app.use(express.static(path.join(__dirname, "../client/dist")));
+app.use(express.static(path.join(__dirname, "./client/dist")));
 
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/dist", "index.html"));
+  res.sendFile(path.join(__dirname, "./client/dist", "index.html"));
 });
 
 // Start the server
