@@ -4,9 +4,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node index.js",
+    "start": "nodemon --env-file .env index.js",
     "build": "npm install",
-    "dev": "nodemon index.js",	
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
