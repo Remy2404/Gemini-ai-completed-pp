@@ -6,10 +6,11 @@ const DashboardPage = () => {
   const queryClient = useQueryClient();
 
   const navigate = useNavigate();
+  const VITE_SERVER_URL = import.meta.env.VITE_SERVER_URL || "https://gemini-ai-orcin-psi.vercel.app";
 
   const mutation = useMutation({
     mutationFn: (text) => {
-      return fetch(`${import.meta.env.VITE_API_URL}/api/chats`, {
+      return fetch(`${VITE_SERVER_URL}/api/chats`, {
         method: "POST",
         credentials: "include",
         headers: {
@@ -65,5 +66,4 @@ const DashboardPage = () => {
     </div>
   );
 };
-
 export default DashboardPage;
