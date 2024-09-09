@@ -1,9 +1,9 @@
 .homepage {
   display: flex;
   align-items: center;
-  gap: 100px;
+  gap: 10px;
   position: relative;
-  height: 100vh;
+  height: 100dvh;
   width: 100%;
 
   @media screen and (max-width: 1024px) {
@@ -135,7 +135,7 @@
 
       .bot {
         width: 100%;
-        height: 100%;
+        height: 1;
         object-fit: contain;
         animation: 3s ease-in-out infinite alternate botAnimate;
       }
@@ -208,60 +208,6 @@
     left: 0;
     width: 100%;
   
-  }
-
-  .footer {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    padding: 20px 0;
-    background-color: #140e2d;
-
-    /* From Uiverse.io by Lokesh1379 */
-    .parent {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    
-    .child {
-      width: 50px;
-      height: 50px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      transform-style: preserve-3d;
-      transition: all 0.5s ease-in-out;
-      border-radius: 50%;
-      margin: 0 5px;
-    }
-    
-    .child:hover {
-      background-color: white;
-      background-position: -100px 100px, -100px 100px;
-      transform: rotate3d(0.5, 1, 0, 30deg);
-      transform: perspective(180px) rotateX(60deg) translateY(2px);
-      box-shadow: 0px 10px 10px rgb(1, 49, 182);
-    }
-    
-    button {
-      border: none;
-      background-color: transparent;
-      font-size: 20px;
-    }
-    
-    .button:hover {
-      width: inherit;
-      height: inherit;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      transform: translate3d(0px, 0px, 15px) perspective(180px) rotateX(-35deg) translateY(2px);
-      border-radius: 50%;
-    }
   }
 }
 

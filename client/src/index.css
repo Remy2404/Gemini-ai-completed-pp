@@ -9,10 +9,27 @@
 }
 
 body {
-  background-color: #0e0c16;
-  color: #ececec;
+  background-color: #ffffff;
+  color: #000000;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+body.dark {
+  background-color: #0e0c16;
+  color: #ececec;
+}
+button {
+  background-color: #1C1A1C;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+body.dark button {
+  background-color: #ffffff;
+  color: #000000;
 }
 
 a {
@@ -30,6 +47,8 @@ html, body, #root {
 
 main {
   flex: 1;
+  width: 100%;
+  height: 100%;
 }
 
 .rootLayout {
@@ -118,4 +137,202 @@ input, textarea, select, button {
   nav a {
     margin: 8px 0;
   }
+}
+/* General Styles */
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: #f0f4f8; /* Light background for contrast */
+  color: #333; /* Default text color */
+}
+
+/* Flexbox Layout */
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.flex-grow {
+  flex-grow: 1;
+}
+
+/* Container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem; /* Responsive padding */
+}
+
+/* Card Styles */
+.card {
+  position: relative;
+  width: 100%; /* Make it responsive */
+  max-width: 500px;
+  height: 300px;
+  background-color: #f2f2f2;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  perspective: 1000px;
+  box-shadow: 0 0 0 5px #ffffff80;
+  transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.card img {
+  width: 100px;
+  fill: #333;
+  transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: pointer;
+  animation: 8s ease-in-out infinite alternate bot_slide;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(255, 255, 255, 0.2);
+}
+
+.card__content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: #f2f2f2;
+  transform: rotateX(-90deg);
+  transform-origin: bottom;
+  transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.card:hover .card__content {
+  transform: rotateX(0deg);
+}
+
+.card__title {
+  margin: 0;
+  font-size: 24px;
+  color: #333;
+  font-weight: 700;
+}
+
+.card__description {
+  margin: 10px 0 0;
+  font-size: 14px;
+  color: #777;
+  line-height: 1.4;
+}
+
+/* Keyframes for Animation */
+@keyframes bot_slide {
+  0% {
+    transform: scale(4) rotate(0deg);
+  }
+  100% {
+    transform: scale(1.1) rotate(-7deg);
+  }
+}
+
+/* Root Layout */
+.rootLayout {
+  padding: 16px 64px;
+  height: 100dvh;
+  width: 100dvw;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  gap: 8px;
+}
+
+.logo img {
+  width: 32px;
+  height: 32px;
+}
+
+/* Dashboard Page */
+.dashboardPage {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.texts {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+  gap: 50px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  opacity: 0.2;
+}
+
+.logo img {
+  width: 64px;
+  height: 64px;
+}
+
+.logo h1 {
+  font-size: 64px;
+  background: linear-gradient(to right, #217bfe, #e55571);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.options {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 50px;
+}
+
+.option {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-weight: 300;
+  font-size: 14px;
+  padding: 20px;
+  border: 1px solid #555;
+  border-radius: 20px;
+}
+
+.option img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+}
+
+/* Form Container */
+.formContainer {
+  margin-top: auto;
+  width: 60%;
+  background-color: #2c2937;
+  border-radius: 20px;
 }

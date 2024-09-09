@@ -9,13 +9,9 @@ import UserChats from "./models/userChats.js";
 import { ClerkExpressWithAuth } from "@clerk/clerk-sdk-node";
 import dotenv from 'dotenv'; // Updated import for Clerk
 
-<<<<<<< HEAD
 dotenv.config();
 
 const port = 3000;
-=======
-const port = process.env.PORT || 3000;
->>>>>>> parent of 3d2f4ff (well done are everythind solved)
 const app = express();
 
 const __filename = fileURLToPath(import.meta.url);

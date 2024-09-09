@@ -20,7 +20,7 @@ const router = createBrowserRouter([
         element: (
           <>
             <Homepage />
-            <Main_content />
+            < Main_content/>
           </>
         ),
       },

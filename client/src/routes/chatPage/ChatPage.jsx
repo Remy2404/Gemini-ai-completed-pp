@@ -1,11 +1,11 @@
-import React from "react"; // Import React library
+import React, { useState, useEffect } from "react";
 import "./chatPage.css";
 import NewPrompt from "../../components/newPrompt/NewPrompt";
 import { useQuery } from "@tanstack/react-query";
 import { useLocation } from "react-router-dom";
 import Markdown from "react-markdown";
 import { IKImage } from "imagekitio-react";
- 
+
 const ChatPage = () => {
   const path = useLocation().pathname;
   const chatId = path.split("/").pop();
@@ -19,10 +19,21 @@ const ChatPage = () => {
       }).then((res) => res.json()),
   });
 
-  console.log(data);
+  const [theme, setTheme] = useState("light");
+
+  useEffect(() => {
+    document.body.classList.toggle("dark", theme === "dark");
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === "light" ? "dark" : "light"));
+  };
 
   return (
     <div className="chatPage">
+      <button onClick={toggleTheme}>
+        Toggle to {theme === "light" ? "Dark" : "Light"} Mode
+      </button>
       <div className="wrapper">
         <div className="chat">
           {isPending
@@ -30,7 +41,7 @@ const ChatPage = () => {
             : error
             ? "Something went wrong!"
             : data?.history?.map((message, i) => (
-              <React.Fragment key={i}>
+                <React.Fragment key={i}>
                   {message.img && (
                     <IKImage
                       urlEndpoint={import.meta.env.VITE_IMAGE_KIT_ENDPOINT}
@@ -46,14 +57,12 @@ const ChatPage = () => {
                     className={
                       message.role === "user" ? "message user" : "message"
                     }
-                    key={i}
                   >
                     <Markdown>{message.parts[0].text}</Markdown>
                   </div>
-                  </React.Fragment>
+                </React.Fragment>
               ))}
-
-          {data && <NewPrompt data={data}/>}
+          {data && <NewPrompt data={data} />}
         </div>
       </div>
     </div>

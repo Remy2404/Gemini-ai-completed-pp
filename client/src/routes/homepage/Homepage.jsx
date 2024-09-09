@@ -4,6 +4,7 @@ import "./homepage.css";
 import { TypeAnimation } from "react-type-animation";
 import { useState } from "react";
 
+
 const Homepage = () => {
   const [typingStatus, setTypingStatus] = useState("human1");
 
