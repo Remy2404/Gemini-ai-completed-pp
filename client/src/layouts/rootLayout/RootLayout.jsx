@@ -14,7 +14,7 @@ const RootLayout = () => {
   return (
     <ClerkProvider publishableKey={PUBLISHABLE_KEY} afterSignOutUrl="/">
       <QueryClientProvider client={queryClient}>
-        <div className="rootLayout flex flex-col min-h-screen">
+        <div className="rootLayout">
           <header>
             <Link to="/" className="logo">
               <img src="/logo_app.png" alt="logo" />
@@ -26,7 +26,7 @@ const RootLayout = () => {
               </SignedIn>
             </div>
           </header>
-           <main className="flex-grow overflow-auto">
+           <main>
             <Outlet/>
            </main>
         </div>
