@@ -8,9 +8,9 @@ import Chat from "./models/chat.js";
 import UserChats from "./models/userChats.js";
 import { ClerkExpressWithAuth } from "@clerk/clerk-sdk-node"; 
 import dotenv from "dotenv";
+import fs from 'fs';
 
 dotenv.config();
-// Updated import for Clerk
 
 const port = process.env.PORT || 3000;
 const app = express();
@@ -52,20 +52,12 @@ app.post("/api/upload", (req, res) => {
   const { signature, expire, token } = req.body;
   res.send({ signature, expire, token });
 });
-//rewrite rule 
+
+// Rewrite rule
 app.use((req, res, next) => {
   const newPath = req.path.replace("/api", "");
   req.url = newPath;
   next();
-  // Continue to the next middleware or route handler:
-  const filePath = path.join(__dirname, "client", "build", newPath);
-  if (fs.existsSync(filePath)) {
-    res.sendFile(filePath);
-  } else {
-    next();
-  }
-
-  // For example, you could redirect to a login page if the user is not authenticated
 });
 
 // Routes
@@ -77,6 +69,57 @@ app.get("/api/upload", (req, res) => {
   const result = imagekit.getAuthenticationParameters();
   res.send(result);
 });
+
+app.get("/api/userchats", async (req, res) => {
+  const userId = req.auth.userId;
+
+  if (!userId) {
+    console.log("Unauthenticated request to /api/userchats");
+    return res.status(401).send("Unauthenticated!");
+  }
+
+  console.log(`Fetching chats for user: ${userId}`);
+
+  try {
+    const userChats = await UserChats.find({ userId });
+    console.log(`Found ${userChats.length} user chat documents`);
+    
+    if (userChats.length > 0) {
+      console.log(`Returning ${userChats[0].chats.length} chats`);
+      res.status(200).send(userChats[0].chats || []);
+    } else {
+      console.log("No user chats found, returning empty array");
+      res.status(200).send([]);
+    }
+  } catch (err) {
+    console.error("Error fetching user chats:", err);
+    res.status(500).json({ error: "Error fetching user chats", details: err.message });
+  }
+});
+
+// Add this new route after the existing /api/userchats route
+
+app.get("/api/chats", async (req, res) => {
+  const userId = req.auth.userId;
+
+  if (!userId) {
+    console.log("Unauthenticated request to /api/chats");
+    return res.status(401).send("Unauthenticated!");
+  }
+
+  console.log(`Fetching all chats for user: ${userId}`);
+
+  try {
+    const chats = await Chat.find({ userId });
+    console.log(`Found ${chats.length} chats`);
+    res.status(200).send(chats);
+  } catch (err) {
+    console.error("Error fetching chats:", err);
+    res.status(500).json({ error: "Error fetching chats", details: err.message });
+  }
+});
+
+// Other routes...
 
 app.post("/api/chats", async (req, res) => {
   const userId = req.auth.userId; // Ensure userId is retrieved from Clerk
@@ -133,22 +176,6 @@ app.post("/api/chats", async (req, res) => {
 });
 
 // Other routes with Clerk authentication
-app.get("/api/userchats", async (req, res) => {
-  const userId = req.auth.userId;
-
-  if (!userId) {
-    return res.status(401).send("Unauthenticated!");
-  }
-
-  try {
-    const userChats = await UserChats.find({ userId });
-    res.status(200).send(userChats[0]?.chats || []);
-  } catch (err) {
-    console.error(err);
-    res.status(500).send("Error fetching user chats!");
-  }
-});
-
 app.get("/api/chats/:id", async (req, res) => {
   const userId = req.auth.userId;
 
@@ -204,10 +231,32 @@ app.use((err, req, res, next) => {
 });
 
 // Serve static files in production
-app.use(express.static(path.join(__dirname, "./client/dist")));
+const clientPath = path.join(__dirname, "../client/dist");
+console.log("Client path:", clientPath);
+
+// Check if the client directory exists
+if (!fs.existsSync(clientPath)) {
+  console.error(`Client directory not found: ${clientPath}`);
+}
+
+app.use(express.static(clientPath));
 
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "./client/dist", "index.html"));
+  const indexPath = path.join(clientPath, "index.html");
+  console.log("Index path:", indexPath);
+  
+  // Check if the index.html file exists
+  if (!fs.existsSync(indexPath)) {
+    console.error(`index.html not found: ${indexPath}`);
+    return res.status(404).send("Page not found");
+  }
+  
+  res.sendFile(indexPath, (err) => {
+    if (err) {
+      console.error("Error sending file:", err);
+      res.status(500).send("Error loading page");
+    }
+  });
 });
 
 // Start the server
