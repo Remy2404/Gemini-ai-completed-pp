@@ -1,10 +1,6 @@
 import axios from 'axios';
 
-<<<<<<< HEAD:client/src/services/api.js
 const API_BASE_URL ='https://server-9uzn.onrender.com/api';
-=======
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:3000/api';
->>>>>>> parent of 92cf284 (add api.js to handle backend):client/api.js
 
 const api = axios.create({
   baseURL: API_BASE_URL,

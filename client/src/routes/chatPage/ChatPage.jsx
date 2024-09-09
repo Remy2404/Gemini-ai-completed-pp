@@ -33,7 +33,7 @@ const ChatPage = () => {
               <React.Fragment key={i}>
                   {message.img && (
                     <IKImage
-                      urlEndpoint={VITE_IMAGE_KIT_ENDPOINT}
+                      urlEndpoint={import.meta.env.VITE_IMAGE_KIT_ENDPOINT}
                       path={message.img}
                       height="300"
                       width="400"
