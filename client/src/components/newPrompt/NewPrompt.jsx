@@ -36,10 +36,9 @@ const NewPrompt = ({ data }) => {
   }, [data, question, answer, img.dbData]);
 
   const queryClient = useQueryClient();
-  const VITE_API_URL = "https://server-9uzn.onrender.com";
   const mutation = useMutation({
     mutationFn: () => {
-      return fetch(`${VITE_API_URL}/api/chats/${data._id}`, {
+      return fetch(`${import.meta.env.VITE_API_URL}/api/chats/${data._id}`, {
         method: "PUT",
         credentials: "include",
         headers: {

@@ -6,19 +6,21 @@ import ImageKit from "imagekit";
 import mongoose from "mongoose";
 import Chat from "./models/chat.js";
 import UserChats from "./models/userChats.js";
-import { ClerkExpressWithAuth } from "@clerk/clerk-sdk-node";
-import dotenv from 'dotenv'; // Updated import for Clerk
+import { ClerkExpressWithAuth } from "@clerk/clerk-sdk-node"; 
+import dotenv from "dotenv";
 
 dotenv.config();
+// Updated import for Clerk
 
-const port = 3000;
+const port = process.env.PORT || 3000;
 const app = express();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
 // CORS options
 const corsOptions = {
-  origin:"https://gemini-ai-930l.onrender.com",
+  origin: process.env.CLIENT_URL,
   credentials: true,
 };
 
@@ -44,6 +46,27 @@ const imagekit = new ImageKit({
 
 // Use Clerk middleware for authentication
 app.use(ClerkExpressWithAuth());
+
+// Upload image middleware
+app.post("/api/upload", (req, res) => {
+  const { signature, expire, token } = req.body;
+  res.send({ signature, expire, token });
+});
+//rewrite rule 
+app.use((req, res, next) => {
+  const newPath = req.path.replace("/api", "");
+  req.url = newPath;
+  next();
+  // Continue to the next middleware or route handler:
+  const filePath = path.join(__dirname, "client", "build", newPath);
+  if (fs.existsSync(filePath)) {
+    res.sendFile(filePath);
+  } else {
+    next();
+  }
+
+  // For example, you could redirect to a login page if the user is not authenticated
+});
 
 // Routes
 app.get("/", (req, res) => {
@@ -181,12 +204,11 @@ app.use((err, req, res, next) => {
 });
 
 // Serve static files in production
-app.use(express.static(path.join(__dirname, "../client/dist")));
+app.use(express.static(path.join(__dirname, "./client/dist")));
 
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/dist", "index.html"));
+  res.sendFile(path.join(__dirname, "./client/dist", "index.html"));
 });
-
 
 // Start the server
 app.listen(port, () => {

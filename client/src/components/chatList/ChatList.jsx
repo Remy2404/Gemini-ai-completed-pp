@@ -2,15 +2,15 @@ import { Link } from "react-router-dom";
 import "./chatList.css";
 import { useQuery } from "@tanstack/react-query";
 
-const VITE_API_URL ="https://server-9uzn.onrender.com";
 const ChatList = () => {
   const { isPending, error, data } = useQuery({
     queryKey: ["userChats"],
     queryFn: () =>
-      fetch(`${VITE_API_URL}/api/userchats`, {
+      fetch(`${import.meta.env.VITE_API_URL}/api/userchats`, {
         credentials: "include",
       }).then((res) => res.json()),
   });
+
   return (
     <div className="chatList">
       <span className="title">DASHBOARD</span>
@@ -32,9 +32,9 @@ const ChatList = () => {
       </div>
       <hr />
       <div className="upgrade">
-        <img src="/logo_app.png" alt="" />
+        <img src="/logo_app.png" alt="logo" />
         <div className="texts">
-          <span>Upgrade to Gemini  AI Pro</span>
+          <span>Upgrade to Gemimi AI Pro</span>
           <span>Get unlimited access to all features</span>
         </div>
       </div>

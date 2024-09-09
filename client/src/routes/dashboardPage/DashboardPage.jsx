@@ -6,11 +6,10 @@ const DashboardPage = () => {
   const queryClient = useQueryClient();
 
   const navigate = useNavigate();
-  const VITE_SERVER_URL = "https://server-9uzn.onrender.com";
 
   const mutation = useMutation({
     mutationFn: (text) => {
-      return fetch(`${VITE_SERVER_URL}/api/chats`, {
+      return fetch(`${import.meta.env.VITE_SERVER_URL}/api/chats`, {
         method: "POST",
         credentials: "include",
         headers: {

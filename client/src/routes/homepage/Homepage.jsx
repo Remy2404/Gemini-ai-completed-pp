@@ -40,7 +40,7 @@ const Homepage = () => {
                   ? "/human2.jpeg"
                   : "bot.png"
               }
-              alt=""
+              alt="x"
             />
             <TypeAnimation
               sequence={[
@@ -76,6 +76,6 @@ const Homepage = () => {
       </div>
     </div>
   );
-};
+}
 
 export default Homepage;

@@ -1,7 +1,6 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "Server for chatgpt-clone-completed-pp project",
   "main": "index.js",
   "type": "module",
   "scripts": {
