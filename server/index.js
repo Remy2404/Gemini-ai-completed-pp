@@ -6,23 +6,24 @@ import ImageKit from "imagekit";
 import mongoose from "mongoose";
 import Chat from "./models/chat.js";
 import UserChats from "./models/userChats.js";
-import { ClerkExpressWithAuth } from "@clerk/clerk-sdk-node";
+import { ClerkExpressWithAuth } from "@clerk/clerk-sdk-node"; // Updated import for Clerk
 
 const port = process.env.PORT || 3000;
 const app = express();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const CLIENT_URL = "https://gemini-ai-930l.onrender.com";
-
+const CLIENT_URL = "https://gemini-ai-orcin-psi.vercel.app";
+// CORS options
 const corsOptions = {
-  origin: CLIENT_URL,
+  origin: process.env.CLIENT_URL,
   credentials: true,
 };
 
 app.use(cors(corsOptions));
 app.use(express.json());
 
+// Connect to MongoDB
 const connect = async () => {
   try {
     await mongoose.connect(process.env.MONGO);
@@ -32,14 +33,17 @@ const connect = async () => {
   }
 };
 
+// Initialize ImageKit
 const imagekit = new ImageKit({
   urlEndpoint: process.env.IMAGE_KIT_ENDPOINT,
   publicKey: process.env.IMAGE_KIT_PUBLIC_KEY,
   privateKey: process.env.IMAGE_KIT_PRIVATE_KEY,
 });
 
+// Use Clerk middleware for authentication
 app.use(ClerkExpressWithAuth());
 
+// Routes
 app.get("/", (req, res) => {
   res.send("Welcome to the API");
 });
@@ -50,14 +54,15 @@ app.get("/api/upload", (req, res) => {
 });
 
 app.post("/api/chats", async (req, res) => {
-  const userId = req.auth.userId;
+  const userId = req.auth.userId; // Ensure userId is retrieved from Clerk
   const { text } = req.body;
 
   if (!userId) {
-    return res.status(401).send("Unauthenticated!");
+    return res.status(401).send("Unauthenticated!"); // Handle unauthenticated access
   }
 
   try {
+    // CREATE A NEW CHAT
     const newChat = new Chat({
       userId: userId,
       history: [{ role: "user", parts: [{ text }] }],
@@ -65,9 +70,11 @@ app.post("/api/chats", async (req, res) => {
 
     const savedChat = await newChat.save();
 
-    const userChats = await UserChats.findOne({ userId: userId });
+    // CHECK IF THE USERCHATS EXISTS
+    const userChats = await UserChats.find({ userId: userId });
 
-    if (!userChats) {
+    // IF DOESN'T EXIST CREATE A NEW ONE AND ADD THE CHAT IN THE CHATS ARRAY
+    if (!userChats.length) {
       const newUserChats = new UserChats({
         userId: userId,
         chats: [
@@ -77,8 +84,10 @@ app.post("/api/chats", async (req, res) => {
           },
         ],
       });
+
       await newUserChats.save();
     } else {
+      // IF EXISTS, PUSH THE CHAT TO THE EXISTING ARRAY
       await UserChats.updateOne(
         { userId: userId },
         {
@@ -91,13 +100,14 @@ app.post("/api/chats", async (req, res) => {
         }
       );
     }
-    res.status(201).send(savedChat._id);
+    res.status(201).send(newChat._id);
   } catch (err) {
     console.error(err);
     res.status(500).send("Error creating chat!");
   }
 });
 
+// Other routes with Clerk authentication
 app.get("/api/userchats", async (req, res) => {
   const userId = req.auth.userId;
 
@@ -106,8 +116,8 @@ app.get("/api/userchats", async (req, res) => {
   }
 
   try {
-    const userChats = await UserChats.findOne({ userId });
-    res.status(200).send(userChats?.chats || []);
+    const userChats = await UserChats.find({ userId });
+    res.status(200).send(userChats[0]?.chats || []);
   } catch (err) {
     console.error(err);
     res.status(500).send("Error fetching user chats!");
@@ -123,9 +133,6 @@ app.get("/api/chats/:id", async (req, res) => {
 
   try {
     const chat = await Chat.findOne({ _id: req.params.id, userId });
-    if (!chat) {
-      return res.status(404).send("Chat not found");
-    }
     res.status(200).send(chat);
   } catch (err) {
     console.error(err);
@@ -148,7 +155,7 @@ app.put("/api/chats/:id", async (req, res) => {
   ];
 
   try {
-    const updatedChat = await Chat.findOneAndUpdate(
+    const updatedChat = await Chat.updateOne(
       { _id: req.params.id, userId },
       {
         $push: {
@@ -156,12 +163,8 @@ app.put("/api/chats/:id", async (req, res) => {
             $each: newItems,
           },
         },
-      },
-      { new: true }
+      }
     );
-    if (!updatedChat) {
-      return res.status(404).send("Chat not found");
-    }
     res.status(200).send(updatedChat);
   } catch (err) {
     console.error(err);
@@ -169,11 +172,20 @@ app.put("/api/chats/:id", async (req, res) => {
   }
 });
 
+// Error handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send("Internal Server Error!");
 });
 
+// Serve static files in production
+app.use(express.static(path.join(__dirname, "/client/dist")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "/client/dist", "index.html"));
+});
+
+// Start the server
 app.listen(port, () => {
   connect();
   console.log(`Server running on port ${port}`);
