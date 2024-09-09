@@ -28,7 +28,7 @@ app.use(express.json());
 // Connect to MongoDB
 const connect = async () => {
   try {
-    await mongoose.connect(MONGO);
+    await mongoose.connect(process.env.MONGO);
     console.log("Connected to MongoDB");
   } catch (err) {
     console.error("MongoDB connection error:", err);
