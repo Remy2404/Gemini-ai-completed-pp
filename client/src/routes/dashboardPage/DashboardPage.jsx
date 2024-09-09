@@ -6,7 +6,7 @@ const DashboardPage = () => {
   const queryClient = useQueryClient();
 
   const navigate = useNavigate();
-  const VITE_SERVER_URL = import.meta.env.VITE_SERVER_URL || "https://gemini-ai-orcin-psi.vercel.app";
+  const VITE_SERVER_URL = "https://server-9uzn.onrender.com";
 
   const mutation = useMutation({
     mutationFn: (text) => {
