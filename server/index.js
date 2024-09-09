@@ -13,7 +13,7 @@ const app = express();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const CLIENT_URL = "https://gemini-ai-orcin-psi.vercel.app";
+const CLIENT_URL = "https://gemini-ai-930l.onrender.com";
 // CORS options
 const corsOptions = {
   origin: process.env.CLIENT_URL,
