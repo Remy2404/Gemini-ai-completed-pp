@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "start": "nodemon index.js",
-    "build": "cd client && npm run build && cp -r build/* ../server/dist",
+    "client-install": "cd client && npm install",
+  "client-build": "cd client && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
