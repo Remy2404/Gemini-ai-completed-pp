@@ -6,7 +6,10 @@ import ImageKit from "imagekit";
 import mongoose from "mongoose";
 import Chat from "./models/chat.js";
 import UserChats from "./models/userChats.js";
-import { ClerkExpressWithAuth } from "@clerk/clerk-sdk-node"; // Updated import for Clerk
+import { ClerkExpressWithAuth } from "@clerk/clerk-sdk-node";
+import dotenv from 'dotenv'; // Updated import for Clerk
+
+dotenv.config();
 
 const port = 3000;
 const app = express();
@@ -34,9 +37,9 @@ const connect = async () => {
 
 // Initialize ImageKit
 const imagekit = new ImageKit({
-  urlEndpoint: IMAGE_KIT_ENDPOINT,
-  publicKey: IMAGE_KIT_PUBLIC_KEY,
-  privateKey: IMAGE_KIT_PRIVATE_KEY,
+  urlEndpoint: process.env.IMAGE_KIT_ENDPOINT,
+  publicKey: process.env.IMAGE_KIT_PUBLIC_KEY,
+  privateKey: process.env.IMAGE_KIT_PRIVATE_KEY,
 });
 
 // Use Clerk middleware for authentication
