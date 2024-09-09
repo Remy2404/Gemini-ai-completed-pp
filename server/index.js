@@ -8,7 +8,7 @@ import Chat from "./models/chat.js";
 import UserChats from "./models/userChats.js";
 import { ClerkExpressWithAuth } from "@clerk/clerk-sdk-node"; // Updated import for Clerk
 
-const port = process.env.PORT || 3000;
+const port = PORT || 3000;
 const app = express();
 
 const __filename = fileURLToPath(import.meta.url);
@@ -25,7 +25,7 @@ app.use(express.json());
 // Connect to MongoDB
 const connect = async () => {
   try {
-    await mongoose.connect(process.env.MONGO);
+    await mongoose.connect(MONGO);
     console.log("Connected to MongoDB");
   } catch (err) {
     console.error("MongoDB connection error:", err);
@@ -34,9 +34,9 @@ const connect = async () => {
 
 // Initialize ImageKit
 const imagekit = new ImageKit({
-  urlEndpoint: process.env.IMAGE_KIT_ENDPOINT,
-  publicKey: process.env.IMAGE_KIT_PUBLIC_KEY,
-  privateKey: process.env.IMAGE_KIT_PRIVATE_KEY,
+  urlEndpoint: IMAGE_KIT_ENDPOINT,
+  publicKey: IMAGE_KIT_PUBLIC_KEY,
+  privateKey: IMAGE_KIT_PRIVATE_KEY,
 });
 
 // Use Clerk middleware for authentication
