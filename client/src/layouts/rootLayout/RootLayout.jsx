@@ -19,7 +19,7 @@ const RootLayout = () => {
           <header>
             <Link to="/" className="logo">
               <img src="/logo_app.png" alt="logo" />
-              <span>Gimini AI</span>
+              <span>Gemini AI</span>
             </Link>
             <div className="user">
               <SignedIn>

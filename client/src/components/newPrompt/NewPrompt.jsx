@@ -36,10 +36,6 @@ const NewPrompt = ({ data }) => {
   }, [data, question, answer, img.dbData]);
 
   const queryClient = useQueryClient();
-<<<<<<< HEAD
-=======
-
->>>>>>> parent of 76ff9de (update dist)
   const mutation = useMutation({
     mutationFn: () => {
       return fetch(`${import.meta.env.VITE_API_URL}/api/chats/${data._id}`, {
