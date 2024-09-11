@@ -6,7 +6,6 @@ import { useEffect } from "react";
 import ChatList from "../../components/chatList/ChatList";
 
 const DashboardLayout = () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const { userId, isLoaded } = useAuth();
   const navigate = useNavigate();
 
@@ -20,11 +19,11 @@ const DashboardLayout = () => {
 
   return (
     <div className="dashboardLayout">
-      <ChatList isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
-      <div className={`content ${isSidebarOpen ? '' : 'fullWidth'}`}>
-        <Outlet context={{ isSidebarOpen }} />
-      </div>
+    <div className="menu"><ChatList/></div>
+    <div className="content">
+      <Outlet />
     </div>
+  </div>
   );
 };
 

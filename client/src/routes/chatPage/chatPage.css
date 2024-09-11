@@ -62,3 +62,24 @@
     max-width: 100%;
   }
 }
+@media (max-width: 480px) {
+  .chat {
+    width: 100%;
+    padding: 0 10px;
+  }
+
+  .message.user {
+    max-width: 90%;
+  }
+}
+
+@media (max-width: 320px) {
+  .chat {
+    width: 100%;
+    padding: 0 5px;
+  }
+
+  .message.user {
+    max-width: 80%;
+  }
+}

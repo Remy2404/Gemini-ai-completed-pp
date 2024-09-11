@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import "./chatList.css";
 import { useQuery } from "@tanstack/react-query";
 
-const ChatList = () => {
+const ChatList = ({ isOpen }) => {
   const { isPending, error, data } = useQuery({
     queryKey: ["userChats"],
     queryFn: () =>
@@ -12,7 +12,7 @@ const ChatList = () => {
   });
 
   return (
-    <div className="chatList">
+    <div className={`chatList ${isOpen ? 'open' : 'closed'}`}>
       <span className="title">DASHBOARD</span>
       <Link to="/dashboard">Create a new Chat</Link>
       <Link to="/">Explore Gemini AI</Link>
@@ -34,7 +34,7 @@ const ChatList = () => {
       <div className="upgrade">
         <img src="/logo_app.png" alt="logo" />
         <div className="texts">
-          <span>Upgrade to Gemimi AI Pro</span>
+          <span>Upgrade to gemimi AI Pro</span>
           <span>Get unlimited access to all features</span>
         </div>
       </div>

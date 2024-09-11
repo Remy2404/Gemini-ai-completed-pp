@@ -49,7 +49,7 @@ const DashboardPage = () => {
             <span>Analyze Images</span>
           </div>
           <div className="option">
-            <img src="/code.png" alt="" />
+            <img src="/code.png" alt="code_img" />
             <span>Help me with my Code</span>
           </div>
         </div>

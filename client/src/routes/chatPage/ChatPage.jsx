@@ -18,21 +18,9 @@ const ChatPage = () => {
       }).then((res) => res.json()),
   });
 
-  const [theme, setTheme] = useState("light");
-
-  useEffect(() => {
-    document.body.classList.toggle("dark", theme === "dark");
-  }, [theme]);
-
-  const toggleTheme = () => {
-    setTheme((prev) => (prev === "light" ? "dark" : "light"));
-  };
 
   return (
     <div className="chatPage">
-      <button onClick={toggleTheme}>
-        Toggle to {theme === "light" ? "Dark" : "Light"} Mode
-      </button>
       <div className="wrapper">
         <div className="chat">
           {isPending

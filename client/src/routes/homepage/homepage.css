@@ -1,7 +1,7 @@
 .homepage {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 50px;
   position: relative;
   height: 100dvh;
   width: 100%;
@@ -37,6 +37,7 @@
 
       @media screen and (max-width: 1024px) {
         max-width: 100%;
+        gap:30px
       }
     }
     /* From Uiverse.io by AlimurtuzaCodes */ 
@@ -134,7 +135,7 @@
       }
 
       .bot {
-        width: 100%;
+        width: 50%;
         height: 1;
         object-fit: contain;
         animation: 3s ease-in-out infinite alternate botAnimate;

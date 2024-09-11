@@ -1,7 +1,7 @@
 .card {
     position: relative;
-    width: 500px;
-    height: 300px;
+    width: 700px;
+    height: 400px;
     background-color: #f2f2f2;
     border-radius: 10px;
     display: flex;
@@ -63,6 +63,44 @@
     line-height: 1.4;
   }
 
+  @media (max-width: 768px) {
+    .card {
+      width: 100%;
+      height: auto;
+      min-height: 200px;
+    }
+
+    .card img {
+      width: 80px;
+    }
+
+    .card__title {
+      font-size: 20px;
+    }
+
+    .card__description {
+      font-size: 12px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .card {
+      min-height: 150px;
+    }
+
+    .card img {
+      width: 60px;
+    }
+
+    .card__title {
+      font-size: 18px;
+    }
+
+    .card__description {
+      font-size: 11px;
+    }
+  }
+
   @keyframes bot_slide {
     0% {
       transform: scale(4) rotate(0deg);
@@ -78,87 +116,6 @@ body {
   font-family: 'Arial', sans-serif;
   background-color: #f0f4f8; /* Light background for contrast */
   color: #333; /* Default text color */
-}
-
-/* Flexbox Layout */
-.flex {
-  display: flex;
-}
-
-.flex-col {
-  flex-direction: column;
-}
-
-.flex-grow {
-  flex-grow: 1;
-}
-
-/* Container */
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1rem; /* Responsive padding */
-}
-
-/* Section Styles */
-section {
-  padding: 2rem 0; /* Vertical padding */
-}
-
-/* Grid Styles */
-.grid {
-  display: grid;
-}
-
-.grid-cols-2 {
-  grid-template-columns: repeat(2, 1fr);
-}
-
-.grid-cols-3 {
-  grid-template-columns: repeat(3, 1fr);
-}
-
-.gap-8 {
-  gap: 2rem; /* Space between grid items */
-}
-
-.gap-12 {
-  gap: 3rem; /* Space between grid items */
-}
-
-/* Typography */
-h2, h3 {
-  margin: 0;
-}
-
-h2 {
-  font-size: 2rem; /* Base size for h2 */
-}
-
-h3 {
-  font-size: 1.5rem; /* Base size for h3 */
-}
-
-.text-muted-foreground {
-  color: #6b7280; /* Muted text color */
-}
-
-/* Button Styles */
-button {
-  padding: 0.5rem 1rem;
-  border: none;
-  border-radius: 0.375rem; /* Rounded corners */
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.bg-sky-500 {
-  background-color: #3b82f6; /* Sky blue */
-  color: white; /* Text color */
-}
-
-.bg-sky-500:hover {
-  background-color: #2563eb; /* Darker blue on hover */
 }
 
 /* Card Styles */
@@ -182,13 +139,32 @@ button {
   .container {
     padding: 0 0.5rem; /* Less padding on mobile */
   }
+
+  .card {
+    width: 100%;
+    height: auto;
+    padding: 1rem;
+  }
+
+  .card img {
+    width: 80px;
+  }
+
+  .card__title {
+    font-size: 20px;
+  }
+
+  .card__description {
+    font-size: 12px;
+  }
 }
 
 /* Footer Styles */
 footer {
-  background-color: #f8fafc; /* Light footer background */
+  background-color: #f8fafc;
   padding: 2rem 0; /* Vertical padding */
-  text-align: center; /* Centered text */
+  text-align: center;
+  justify-content: center;
 }
 
 footer a {
