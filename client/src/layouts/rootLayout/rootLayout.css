@@ -1,6 +1,7 @@
 .rootLayout {
   padding: 16px 64px;
-  height: 100dvh;
+  height: auto;
+  width: auto;
   display: flex;
   flex-direction: column;
 
@@ -12,7 +13,6 @@
     align-items: center;
     justify-content: space-between;
     gap: 20px;
-    background-color: var(--bg-color);
 
     .logo {
       display: flex;

@@ -47,6 +47,17 @@ export default {
         md: `calc(var(--radius) - 2px)`,
         sm: `calc(var(--radius) - 4px)`
       },
+      textColor: {
+        skin: {
+          base: 'var(--text-color)',
+          muted: 'var(--muted-foreground)',
+        },
+      },
+      backgroundColor: {
+        skin: {
+          fill: 'var(--bg-color)',
+        },
+      },
       keyframes: {
         "accordion-down": {
           from: { height: 0 },

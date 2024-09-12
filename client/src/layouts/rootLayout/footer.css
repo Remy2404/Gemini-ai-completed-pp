@@ -1,0 +1,104 @@
+.footer {
+    width: 100%;
+    z-index: 1;
+    --footer-background: #a44565; /* Background color */
+    display: grid;
+    position: relative;
+    grid-area: footer;
+    min-height: 12rem;
+    text-align: center;
+    align-items: center;
+    padding: 2rem 1rem; /* Added padding for better spacing */
+    background: var(--footer-background);
+}
+
+.bubbles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1rem;
+    background: var(--footer-background);
+    filter: url("#blob");
+}
+
+.bubble {
+    position: absolute;
+    left: var(--position, 50%);
+    background: var(--footer-background);
+    border-radius: 100%;
+    animation: bubble-size var(--time, 4s) ease-in infinite var(--delay, 0s),
+      bubble-move var(--time, 4s) ease-in infinite var(--delay, 0s);
+    transform: translate(-50%, 100%);
+}
+
+.content {
+    z-index: 2;
+    display: flex; /* Changed to flex for better layout control */
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center content */
+    padding: 2rem;
+    gap: 1rem; /* Space between elements */
+}
+
+a, p {
+    color: #ffffff; /* Text color */
+    text-decoration: none;
+}
+
+b {
+    color: white; /* Bold text color */
+}
+
+p {
+    margin: 0;
+    font-size: 0.75rem; /* Font size for copyright */
+}
+
+.image {
+    align-self: center;
+    width: 4rem;
+    height: 4rem;
+    margin: 0.25rem 0;
+    background-size: cover;
+    background-position: center;
+}
+
+.social-icons {
+    display: flex; /* Flexbox for social icons */
+    justify-content: center; /* Center the icons */
+    gap: 1rem; /* Space between icons */
+}
+
+.footer-links {
+    display: flex; /* Flexbox for footer links */
+    justify-content: center; /* Center the links */
+    gap: 2rem; /* Space between links */
+    margin-top: 1rem; /* Space above links */
+    font-size: 0.875rem; /* Font size for links */
+    color: #ffffff; /* Link color */
+}
+
+.footer-links a:hover {
+    color: #f0f0f0; /* Lighter color on hover */
+}
+
+@keyframes bubble-size {
+    0%, 75% {
+        width: var(--size, 4rem);
+        height: var(--size, 4rem);
+    }
+    100% {
+        width: 0rem;
+        height: 0rem;
+    }
+}
+
+@keyframes bubble-move {
+    0% {
+        bottom: -4rem;
+    }
+    100% {
+        bottom: var(--distance, 10rem);
+    }
+}

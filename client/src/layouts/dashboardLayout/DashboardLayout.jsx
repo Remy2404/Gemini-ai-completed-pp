@@ -5,13 +5,14 @@ import { useAuth } from "@clerk/clerk-react";
 import { useEffect } from "react";
 import ChatList from "../../components/chatList/ChatList";
 
-const [sidebarOpen, setSidebarOpen] = useState(true);
-toggleSidebar = () => {
-  setSidebarOpen(!sidebarOpen);
-};
 const DashboardLayout = () => {
   const { userId, isLoaded } = useAuth();
   const navigate = useNavigate();
+  const [sidebarOpen, setSidebarOpen] = useState(true);
+
+  const toggleSidebar = () => {
+    setSidebarOpen(!sidebarOpen);
+  };
 
   useEffect(() => {
     if (isLoaded && !userId) {
@@ -23,11 +24,11 @@ const DashboardLayout = () => {
 
   return (
     <div className="dashboardLayout">
-    <div className="menu"><ChatList/></div>
-    <div className="content">
-      <Outlet />
+      <div className="menu"><ChatList/></div>
+      <div className="content">
+        <Outlet />
+      </div>
     </div>
-  </div>
   );
 };
 

@@ -10,6 +10,7 @@ import DashboardLayout from "./layouts/dashboardLayout/DashboardLayout";
 import SignInPage from "./routes/signInPage/signInPage";
 import SignUpPage from "./routes/signUpPage/signUpPage";
 import Main_content from "./layouts/rootLayout/Main_content";
+import Footer from "./layouts/rootLayout/Footer";
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,7 @@ const router = createBrowserRouter([
           <>
             <Homepage />
             < Main_content/>
+            <Footer/>
           </>
         ),
       },
