@@ -5,6 +5,10 @@ import { useAuth } from "@clerk/clerk-react";
 import { useEffect } from "react";
 import ChatList from "../../components/chatList/ChatList";
 
+const [sidebarOpen, setSidebarOpen] = useState(true);
+toggleSidebar = () => {
+  setSidebarOpen(!sidebarOpen);
+};
 const DashboardLayout = () => {
   const { userId, isLoaded } = useAuth();
   const navigate = useNavigate();
