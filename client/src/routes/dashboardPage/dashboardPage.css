@@ -3,6 +3,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
 }
 
 .dashboardPage .texts {
@@ -11,59 +12,49 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 50%;
-  gap: 50px;
-}
-
-.dashboardPage .texts .logo {
-  display: flex;
-  align-items: center;
+  width: 100%; /* Changed to 100% for better responsiveness */
   gap: 20px;
-  opacity: 0.2;
 }
 
-.dashboardPage .texts .logo img {
-  width: 64px;
-  height: 64px;
-}
-
-.dashboardPage .texts .logo h1 {
-  font-size: 64px;
+.dashboardPage h1 {
+  font-size: 2.5rem; /* Responsive font size */
   background: linear-gradient(to right, #217bfe, #e55571);
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
 }
 
-.dashboardPage .texts .options {
-  width: 100%;
+.dashboardPage .options {
+  width: 50%;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 50px;
+  flex-wrap: wrap; /* Allow wrapping on smaller screens */
+  justify-content: space-around; /* Space items evenly */
+  gap: 20px;
 }
 
-.dashboardPage .texts .options .option {
-  flex: 1;
+.dashboardPage .option {
+  flex: 1 1 30%; /* Allow items to grow and shrink */
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 10px;
   font-weight: 300;
   font-size: 14px;
   padding: 20px;
   border: 1px solid #555;
   border-radius: 20px;
+  text-align: center;
 }
 
-.dashboardPage .texts .options .option img {
-  width: 40px;
+.dashboardPage .img_for {
+  width: 60px; /* Adjusted for better visibility */
   height: 40px;
   object-fit: cover;
 }
 
 .dashboardPage .formContainer {
   margin-top: auto;
-  width: 100%;
+  width: 80%;
   background-color: #4c475a;
   border-radius: 20px;
   display: flex;
@@ -71,17 +62,16 @@
 
 .dashboardPage .formContainer form {
   width: 100%;
-  height: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 20px;
-  margin-bottom: 10px;
+  gap: 10px;
+  padding: 10px; /* Added padding for better spacing */
 }
 
 .dashboardPage .formContainer form input {
   flex: 1;
-  padding: 20px;
+  padding: 10px; /* Adjusted padding */
   background-color: transparent;
   border: none;
   outline: none;
@@ -97,10 +87,26 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-right: 20px;
 }
 
 .dashboardPage .formContainer form button img {
   width: 25px;
-  height: 20px;
+  height: 25px;
+  object-fit: contain;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .dashboardPage h1 {
+    font-size: 2rem; /* Smaller font size for mobile */
+  }
+
+  .dashboardPage .options {
+    flex-direction: column; /* Stack options vertically */
+    align-items: center;
+  }
+
+  .dashboardPage .option {
+    width: 80%; /* Full width for options on mobile */
+  }
 }

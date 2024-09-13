@@ -1,41 +1,37 @@
 import React, { useEffect, useRef, useState } from "react";
-import "./newPrompt.css";
-import Upload from "../upload/Upload";
 import { IKImage } from "imagekitio-react";
-import model from "../../lib/gemini";
 import Markdown from "react-markdown";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { Send, Upload as UploadIcon } from "lucide-react";
+import model from "../../lib/gemini";
 
-const NewPrompt = ({ data }) => {
+export default function NewPrompt({ data }) {
   const [question, setQuestion] = useState("");
-   const [answer, setAnswer] = useState("");
-   const [img, setImg] = useState({
+  const [answer, setAnswer] = useState("");
+  const [img, setImg] = useState({
     isLoading: false,
     error: "",
-    dbData: {},
+    dbData: { filePath: "" },
     aiData: {},
   });
 
   const chat = model.startChat({
-    history: data?.history?.length
-      ? data.history.map(({ role, parts }) => ({
-          role,
-          parts: parts.map((part) => ({ text: part.text })),
-        }))
-      : [{ role: "user", parts: [{ text: "Hello" }] }],
-    generationConfig: {
-      // maxOutputTokens: 100,
-    },
+    history: data?.history.map(({ role, parts }) => ({
+      role,
+      parts: [{ text: parts[0].text }],
+    })) || [],
+    generationConfig: {},
   });
 
   const endRef = useRef(null);
   const formRef = useRef(null);
 
   useEffect(() => {
-    endRef.current.scrollIntoView({ behavior: "smooth" });
+    endRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [data, question, answer, img.dbData]);
 
   const queryClient = useQueryClient();
+
   const mutation = useMutation({
     mutationFn: () => {
       return fetch(`${import.meta.env.VITE_API_URL}/api/chats/${data._id}`, {
@@ -52,22 +48,20 @@ const NewPrompt = ({ data }) => {
       }).then((res) => res.json());
     },
     onSuccess: () => {
-      queryClient
-        .invalidateQueries({ queryKey: ["chat", data._id] })
-        .then(() => {
-          formRef.current.reset();
-          setQuestion("");
-          setAnswer("");
-          setImg({
-            isLoading: false,
-            error: "",
-            dbData: {},
-            aiData: {},
-          });
+      queryClient.invalidateQueries({ queryKey: ["chat", data._id] }).then(() => {
+        formRef.current?.reset();
+        setQuestion("");
+        setAnswer("");
+        setImg({
+          isLoading: false,
+          error: "",
+          dbData: { filePath: "" },
+          aiData: {},
         });
+      });
     },
     onError: (err) => {
-      console.log(err);
+      console.error(err);
     },
   });
 
@@ -88,20 +82,18 @@ const NewPrompt = ({ data }) => {
 
       mutation.mutate();
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const text = e.target.text.value;
+    const formData = new FormData(e.currentTarget);
+    const text = formData.get("text");
     if (!text) return;
-
     add(text, false);
   };
 
-  // IN PRODUCTION WE DON'T NEED IT
   const hasRun = useRef(false);
 
   useEffect(() => {
@@ -114,36 +106,57 @@ const NewPrompt = ({ data }) => {
   }, []);
 
   return (
-    <>
-      {/* ADD NEW CHAT */}
-      {img.isLoading && <div className="">Loading...</div>}
+    <div className="flex flex-col space-y-4">
+      {img.isLoading && (
+        <div className="text-center text-gray-500">Loading...</div>
+      )}
       {img.dbData?.filePath && (
         <IKImage
           urlEndpoint={import.meta.env.VITE_IMAGE_KIT_ENDPOINT}
-          path={img.dbData?.filePath}
+          path={img.dbData.filePath}
           width="380"
           transformation={[{ width: 380 }]}
+          className="rounded-lg shadow-md mx-auto"
         />
       )}
-      {question && <div className="message user">{question}</div>}
-      {answer && (
-        <div className="message">
-          <Markdown>{answer}</Markdown>
+      {question && (
+        <div className="bg-blue-100 p-4 rounded-lg text-blue-800 shadow-sm">
+          {question}
         </div>
       )}
-
-      {/* Chat Input Form */}
-      <div className="endChat" ref={endRef}></div>
-      <form className="newForm" onSubmit={handleSubmit} ref={formRef}>
-        <Upload setImg={setImg} />
+      {answer && (
+        <div className="bg-gray-100 p-4 rounded-lg shadow-sm">
+          <Markdown className="prose prose-sm sm:prose-base max-w-none">
+            {answer}
+          </Markdown>
+        </div>
+      )}
+      <div ref={endRef}></div>
+      <form
+        className="flex items-center space-x-2 bg-white p-2 rounded-lg shadow-sm"
+        onSubmit={handleSubmit}
+        ref={formRef}
+      >
+        <label
+          htmlFor="file"
+          className="cursor-pointer p-2 rounded-full hover:bg-gray-100 transition-colors"
+        >
+          <UploadIcon className="w-6 h-6 text-gray-500" />
+        </label>
         <input id="file" type="file" multiple={false} hidden />
-        <input type="text" name="text" placeholder="Ask anything..." />
-        <button>
-          <img src="/arrow.png" className="arrow" alt="arrow" />
+        <input
+          type="text"
+          name="text"
+          placeholder="Ask anything..."
+          className="flex-grow p-2 text-gray-800 bg-transparent focus:outline-none"
+        />
+        <button
+          type="submit"
+          className="p-2 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition-colors"
+        >
+          <Send className="w-5 h-5" />
         </button>
       </form>
-    </>
+    </div>
   );
-};
-
-export default NewPrompt;
+}

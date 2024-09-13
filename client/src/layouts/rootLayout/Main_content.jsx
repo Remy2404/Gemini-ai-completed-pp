@@ -27,13 +27,14 @@ export default function Component() {
         <section
           id="features"
           className="w-full py-12 sm:py-20 md:py-28 lg:py-36 xl:py-44 bg-background"
+
         >
           <div className="container px-4 md:px-6">
             <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
               <div className="grid gap-4 items-start">
                 <BoltIcon className="w-10 h-10 text-sky-500" />
                 <h3 className="text-xl sm:text-2xl font-bold">Blazing Fast</h3>
-                <p className="text-sm sm:text-base text-muted-foreground">
+                <p className="text-sm sm:text-base text-gray-400">
                   Gemini AI responds instantly, so you can get the information
                   you need in real-time.
                 </p>
@@ -43,7 +44,7 @@ export default function Component() {
                 <h3 className="text-xl sm:text-2xl font-bold">
                   Highly Customizable
                 </h3>
-                <p className="text-sm sm:text-base text-muted-foreground">
+                <p className="text-sm sm:text-base text-gray-500">
                   Tailor Gemini AI to your specific needs with a wide range of
                   configuration options.
                 </p>
@@ -53,7 +54,7 @@ export default function Component() {
                 <h3 className="text-xl sm:text-2xl font-bold">
                   Innovative Features
                 </h3>
-                <p className="text-sm sm:text-base text-muted-foreground">
+                <p className="text-sm sm:text-base text-gray-500">
                   Gemini AI is constantly evolving, with new features and
                   capabilities added regularly.
                 </p>
@@ -63,7 +64,7 @@ export default function Component() {
                 <h3 className="text-xl sm:text-2xl font-bold">
                   Developer Friendly
                 </h3>
-                <p className="text-sm sm:text-base text-muted-foreground">
+                <p className="text-sm sm:text-base text-gray-500">
                   Integrate Gemini AI seamlessly into your applications with our
                   powerful API.
                 </p>
@@ -73,7 +74,7 @@ export default function Component() {
                 <h3 className="text-xl sm:text-2xl font-bold">
                   Secure and Private
                 </h3>
-                <p className="text-sm sm:text-base text-muted-foreground">
+                <p className="text-sm sm:text-base text-gray-500">
                   Your data is safe with Gemini AI, with industry-leading
                   security and privacy measures.
                 </p>
@@ -83,7 +84,7 @@ export default function Component() {
                 <h3 className="text-xl sm:text-2xl font-bold">
                   Exceptional Support
                 </h3>
-                <p className="text-sm sm:text-base text-muted-foreground">
+                <p className="text-sm sm:text-base text-gray-500">
                   Our dedicated support team is here to help you get the most
                   out of Gemini AI.
                 </p>
@@ -117,7 +118,7 @@ export default function Component() {
                         <span className="text-3xl sm:text-4xl font-bold">
                           $0
                         </span>
-                        <span className="text-sm sm:text-base text-muted-foreground">
+                        <span className="text-sm sm:text-base text-gray-500">
                           /month
                         </span>
                       </div>
@@ -216,7 +217,7 @@ export default function Component() {
                 <h2 className="text-2xl sm:text-3xl font-bold tracking-tighter sm:text-5xl">
                   Get in Touch
                 </h2>
-                <p className="max-w-[600px] text-sm sm:text-base text-muted-foreground md:text-xl">
+                <p className="text-blue-400 max-w-[600px] text md:text-xl-sm sm:text-base ">
                   Have a question or want to learn more? Reach out to our team,
                   and we'll get back to you as soon as possible.
                 </p>
@@ -226,10 +227,10 @@ export default function Component() {
                   <span className="font-extrabold text-xl sm:text-2xl text-violet-600">
                     Get more updates...
                   </span>
-                  <p className="text-neutral-700 text-sm sm:text-base">
+                  <div className="text-neutral-700 text-sm sm:text-base">
                     Sign up for our newsletter and you'll be the first to find
                     out about new features
-                  </p>
+                  </div>
                 </div>
                 <div className="flex flex-col sm:flex-row gap-2 sm:gap-1 mt-4 sm:mt-0">
                   <div className="relative rounded-lg w-full sm:w-64 overflow-hidden before:absolute before:w-12 before:h-12 before:content[''] before:right-0 before:bg-violet-500 before:rounded-full before:blur-lg after:absolute after:z-10 after:w-20 after:h-20 after:content[''] after:bg-rose-300 after:right-12 after:top-3 after:rounded-full after:blur-lg">
@@ -248,7 +249,6 @@ export default function Component() {
           </div>
         </section>
       </div>
-      {/* <Footer /> */}
     </div>
   );
 }
