@@ -98,10 +98,10 @@ const Footer = () => {
               rel="noopener noreferrer"
               style={{
                 backgroundImage:
-                  'url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/199011/happy.svg")',
+                  'url("/logo_app.png")',
               }}
             />
-            <p className="text-gray-400 ml-2">©2019 Not Really</p>
+            <p className="text-gray-400 ml-2">Gemini ai copy right 2024</p>
           </div>
         </div>
         <svg style={{ position: "fixed", top: "100vh" }}>
