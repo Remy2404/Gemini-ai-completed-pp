@@ -9,7 +9,9 @@
 
 #### **Project Overview**
 You've just cloned a minimal setup template for creating a React 18 chat bot application. This project leverages Vite for development, ensuring fast code updates with Hot Module Replacement (HMR). It also includes ESLint rules to maintain code quality and consistency.
-**Gemini ai website:** [Gemini AI Chat](https://gemini-ai-930l.onrender.com/)
+-**Gemini ai website:** [Gemini AI Chat](https://gemini-ai-930l.onrender.com/)
+**Youtube demo:** [The full-stack nature of the project (MERN stack)](https://www.youtube.com/watch?v=dv9UR1WHQX8)
+
 
 ### Figma Design Prototype
 This application has been prototyped in Figma. The design provides a blueprint for the chat bot's UI, offering insights into user interactions, UI layout, and styling. You can explore the design and prototype below:
@@ -48,7 +50,7 @@ To get your development environment up and running, follow these steps:
 
 1. **Navigate to the project folder:**
    ```sh
-   cd chatgpt-clone-completed-pp/client
+   cd Gemini-ai-completed-pp/client
    ```
 
 2. **Install dependencies:**
@@ -101,7 +103,7 @@ To get your development environment up and running, follow these steps:
   - Source code: `src` directory with `App.jsx`, `index.css`, `main.jsx`
   - Components: Organized in `components` directory
   - Utilities: `lib` directory with helper files
-  - Routing: `routes` directory with `AppRoutes.jsx`
+  - Routing: `routes` directory with `index.jsx`
 
 - **Public Directory:**
   - Static assets like `favicon.ico`
