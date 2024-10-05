@@ -1,3 +1,6 @@
+To update your **README.md** to include information about the Figma design and prototype for the Chat Bot Application, I will modify the relevant sections. Here's the updated file with new sections for the Figma design and instructions for how to use it:
+
+---
 
 # Chat Bot Application
 
@@ -7,16 +10,30 @@
 #### **Project Overview**
 You've just cloned a minimal setup template for creating a React 18 chat bot application. This project leverages Vite for development, ensuring fast code updates with Hot Module Replacement (HMR). It also includes ESLint rules to maintain code quality and consistency.
 
+### Figma Design Prototype
+This application has been prototyped in Figma. The design provides a blueprint for the chat bot's UI, offering insights into user interactions, UI layout, and styling. You can explore the design and prototype below:
+
+- **Figma Design:** [Figma Design Link](https://www.figma.com/design/MBqLRGrEx3zp6kyz3E2oqK/Gemini-Ai-chat?node-id=0-1&t=PnnmAGjQf6gDskRx-1)
+- **Figma Prototype:** [Figma Prototype Link](https://www.figma.com/proto/MBqLRGrEx3zp6kyz3E2oqK/Gemini-Ai-chat?node-id=5-246&node-type=canvas&t=qLfA7JUrR4IeW58s-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=5%3A246)
+
+The Figma design provides:
+- A **modern UI** layout.
+- **User flow** interactions for the chat bot.
+- Detailed **component styles** for seamless frontend integration.
+
+The prototype allows you to **click through** and simulate the user experience, giving you a better understanding of the UI structure and user flow.
+
 ## Table of Contents
 1. Project Overview
-2. Getting Started
-3. Key Components
-4. Important Scripts
-5. Project Structure
-6. Notable Aspects
-7. Next Steps
-8. Contributing
-9. License
+2. Figma Design Prototype
+3. Getting Started
+4. Key Components
+5. Important Scripts
+6. Project Structure
+7. Notable Aspects
+8. Next Steps
+9. Contributing
+10. License
 
 ## Getting Started
 
@@ -99,13 +116,14 @@ To get your development environment up and running, follow these steps:
 - **Clear Separation**: Distinct client-side and server-side code.
 
 ## Next Steps
-Start exploring the codebase, make some changes, and see them live instantly with Vite's HMR. Happy coding, and welcome to the project! If you need more details, check out the project's GitHub repository for updates and additional information.
+Start exploring the codebase, make some changes, and see them live instantly with Vite's HMR. Also, use the **Figma prototype** to refine the UI and improve user experience. 
+
+Happy coding, and welcome to the project! If you need more details, check out the project's GitHub repository for updates and additional information.
 
 ## Contributing
 Contributions are welcome! Please read the [contributing guidelines](CONTRIBUTING.md) for more details.
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-```
 
-Feel free to adjust any sections as needed. Let me know if there's anything else you'd like to add or modify!
+---
