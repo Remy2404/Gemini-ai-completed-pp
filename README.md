@@ -1,4 +1,4 @@
-To update your **README.md** to include information about the Figma design and prototype for the Chat Bot Application, I will modify the relevant sections. Here's the updated file with new sections for the Figma design and instructions for how to use it:
+
 
 ---
 
