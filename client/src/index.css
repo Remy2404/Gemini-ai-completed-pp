@@ -9,16 +9,32 @@
   box-sizing: border-box;
 }
 
-body  , #root{
-  background-color: #2C2937;
-  color: #000000;
+body, #root {
+  background-color: #f8fafc; /* Lighter background */
+  color: #1a1a1a;
   font-family: 'Poppins', sans-serif;
-  font-size: 20px;
+  font-size: 16px;
+  line-height: 1.5;
+  min-height: 100vh;
+  width: 100%;
   overflow-x: hidden;
 }
 
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
 
-@media screen and (max-width: 768px) {
+/* Better responsive containers */
+@media (max-width: 1024px) {
+  .container {
+    max-width: 100%;
+    padding: 0 2rem;
+  }
+}
+
+@media (max-width: 768px) {
   html, body, #root {
     height: auto;
     min-height: 100vh;
@@ -30,6 +46,14 @@ body  , #root{
 
   main {
     padding: 16px 0;
+  }
+
+  .container {
+    padding: 0 1rem;
+  }
+  
+  body {
+    font-size: 14px;
   }
 }
 

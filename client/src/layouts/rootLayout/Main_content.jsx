@@ -26,15 +26,14 @@ export default function Component() {
       <div className="flex-grow">
         <section
           id="features"
-          className="w-full py-12 sm:py-20 md:py-28 lg:py-36 xl:py-44 bg-background"
-
+          className="w-full py-16 md:py-24 bg-white"
         >
-          <div className="container px-4 md:px-6">
-            <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="container">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               <div className="grid gap-4 items-start">
                 <BoltIcon className="w-10 h-10 text-sky-500" />
                 <h3 className="text-xl sm:text-2xl font-bold">Blazing Fast</h3>
-                <p className="text-sm sm:text-base text-gray-400">
+                <p className="text-base md:text-lg text-gray-600 max-w-2xl">
                   Gemini AI responds instantly, so you can get the information
                   you need in real-time.
                 </p>
@@ -44,7 +43,7 @@ export default function Component() {
                 <h3 className="text-xl sm:text-2xl font-bold">
                   Highly Customizable
                 </h3>
-                <p className="text-sm sm:text-base text-gray-500">
+                <p className="text-base md:text-lg text-gray-600 max-w-2xl">
                   Tailor Gemini AI to your specific needs with a wide range of
                   configuration options.
                 </p>
@@ -54,7 +53,7 @@ export default function Component() {
                 <h3 className="text-xl sm:text-2xl font-bold">
                   Innovative Features
                 </h3>
-                <p className="text-sm sm:text-base text-gray-500">
+                <p className="text-base md:text-lg text-gray-600 max-w-2xl">
                   Gemini AI is constantly evolving, with new features and
                   capabilities added regularly.
                 </p>
@@ -64,7 +63,7 @@ export default function Component() {
                 <h3 className="text-xl sm:text-2xl font-bold">
                   Developer Friendly
                 </h3>
-                <p className="text-sm sm:text-base text-gray-500">
+                <p className="text-base md:text-lg text-gray-600 max-w-2xl">
                   Integrate Gemini AI seamlessly into your applications with our
                   powerful API.
                 </p>
@@ -74,7 +73,7 @@ export default function Component() {
                 <h3 className="text-xl sm:text-2xl font-bold">
                   Secure and Private
                 </h3>
-                <p className="text-sm sm:text-base text-gray-500">
+                <p className="text-base md:text-lg text-gray-600 max-w-2xl">
                   Your data is safe with Gemini AI, with industry-leading
                   security and privacy measures.
                 </p>
@@ -84,7 +83,7 @@ export default function Component() {
                 <h3 className="text-xl sm:text-2xl font-bold">
                   Exceptional Support
                 </h3>
-                <p className="text-sm sm:text-base text-gray-500">
+                <p className="text-base md:text-lg text-gray-600 max-w-2xl">
                   Our dedicated support team is here to help you get the most
                   out of Gemini AI.
                 </p>
@@ -92,12 +91,12 @@ export default function Component() {
             </div>
           </div>
         </section>
-        <section className="py-12 md:py-24 w-full">
-          <img src="/orbital.png" alt="bg" className="bg-img" />
-          <div className="container px-4 md:px-6">
+        <section className="w-full py-16 md:py-24 bg-gray-50">
+          <img src="/orbital.png" alt="bg" className="bg-img max-w-full h-auto" />
+          <div className="container">
             <div className="grid gap-12 md:grid-cols-2">
               <div>
-                <h2 className="text-2xl sm:text-3xl font-bold tracking-tight sm:text-4xl">
+                <h2 className="text-2xl font-bold tracking-tight sm:text-4xl">
                   Pricing
                 </h2>
                 <p className="mt-4 text-sm sm:text-base text-gray-500">
@@ -143,7 +142,7 @@ export default function Component() {
                       <Button className="w-full bg-sky-500">Sign Up</Button>
                     </CardFooter>
                   </Card>
-                  <Card className="">
+                  <Card className="w-full after:content-[''] after:block after:w-full after:h-[1px] after:bg-white after:mt-8 flex flex-col items-center justify-center">
                     <CardHeader>
                       <CardTitle className="font-bold">Pro</CardTitle>
                       <CardDescription className="font-mono font-semibold text-black text-center">
@@ -209,12 +208,12 @@ export default function Component() {
         </section>
         <section
           id="contact"
-          className="w-full py-12 sm:py-20 md:py-28 lg:py-36 xl:py-44 bg-background"
+          className="w-full py-16 md:py-24 bg-gray-50"
         >
-          <div className="container px-4 md:px-6">
-            <div className="grid gap-8 md:grid-cols-2">
+          <div className="container">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
               <div className="space-y-4">
-                <h2 className="text-2xl sm:text-3xl font-bold tracking-tighter sm:text-5xl">
+                <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-6">
                   Get in Touch
                 </h2>
                 <p className="text-blue-400 max-w-[600px] text md:text-xl-sm sm:text-base ">

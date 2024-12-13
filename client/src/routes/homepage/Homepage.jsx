@@ -1,81 +1,117 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import "./homepage.css";
 import { TypeAnimation } from "react-type-animation";
-import { useState } from "react";
-
+import { motion } from "framer-motion";
+import "./homepage.css";
 
 const Homepage = () => {
-  const [typingStatus, setTypingStatus] = useState("human1");
+  const [isLoading, setIsLoading] = useState(false);
+
+  const fadeIn = {
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.6 }
+  };
 
   return (
     <div className="homepage">
-      <img src="/orbital.png" alt="" className="orbital" />
-      <div className="left">
-        <h1>GEMINI AI</h1>
-        <h2>Supercharge your creativity and productivity</h2>
-        <h3>
-          Unleash the power of AI to transform your ideas into reality 
-          <br />
-        </h3>
-        <Link to="/dashboard" className="a">
-          <svg height="15" width="15" fill="#FFFFFF" viewBox="0 0 24 24" data-name="Layer 1" id="Layer_1" class="sparkle">
-            <path d="M10,21.236,6.755,14.745.264,11.5,6.755,8.255,10,1.764l3.245,6.491L19.736,11.5l-6.491,3.245ZM18,21l1.5,3L21,21l3-1.5L21,18l-1.5-3L18,18l-3,1.5ZM19.333,4.667,20.5,7l1.167-2.333L24,3.5,21.667,2.333,20.5,0,19.333,2.333,17,3.5Z"></path>
-          </svg>
-          <span class="text">Get Started</span>
-        </Link>
-      </div>
-      <div className="right">
-        <div className="imgContainer">
-          <div className="bgContainer">
-            <div className="bg"></div>
-          </div>
-          <img src="/bot_Img.png" alt="" className="bot" />
-          <div className="chat">
-            <img
-              src={
-                typingStatus === "human1"
-                  ? "/Ramy.jpg"
-                  : typingStatus === "human2"
-                  ? "/human2.jpeg"
-                  : "bot.png"
-              }
-              alt="x"
+      <motion.div 
+        className="background-gradient"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+      />
+
+      <motion.div 
+        className="left"
+        {...fadeIn}
+      >
+        <h1 className="title">
+          <span className="gradient-text">GEMINI</span> AI
+        </h1>
+        <h2 className="subtitle">
+          Your AI-Powered Creative Companion
+        </h2>
+        <p className="description">
+          Transform your ideas into reality with advanced AI technology.
+          Create, analyze, and innovate faster than ever before.
+        </p>
+        
+        <motion.div 
+          className="cta-container"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <Link 
+            to="/dashboard" 
+            className="cta-button"
+            onClick={() => setIsLoading(true)}
+          >
+            <span className="button-content">
+              <span className="text">Get Started</span>
+              <svg className="arrow-icon" viewBox="0 0 24 24">
+                <path d="M16.01 11H4v2h12.01v3L20 12l-3.99-4v3z" />
+              </svg>
+            </span>
+          </Link>
+        </motion.div>
+      </motion.div>
+
+            <motion.div 
+        className="right"
+        initial={{ opacity: 0, x: 20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.8, delay: 0.2 }}
+      >
+        <div className="feature-card">
+          <div className="card-content">
+            <motion.img 
+              src="/bot_Img.png"
+              alt="Gemini AI Assistant"
+              className="bot-image"
+              loading="lazy"
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.5 }}
+              whileHover={{ 
+                scale: 1.05,
+                transition: { duration: 0.2 } 
+              }}
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src = '/bg.png';
+              }}
             />
-            <TypeAnimation
-              sequence={[
-                // Same substring at the start will only be typed out once, initially
-                "Human:We produce food for Mice",
-                2000,
-                () => {
-                  setTypingStatus("bot");
-                },
-                "Bot:We produce food for Hamsters",
-                2000,
-                () => {
-                  setTypingStatus("human2");
-                },
-                "Human2:We produce food for Guinea Pigs",
-                2000,
-                () => {
-                  setTypingStatus("bot");
-                },
-                "Bot:We produce food for Chinchillas",
-                2000,
-                () => {
-                  setTypingStatus("human1");
-                },
-              ]}
-              wrapper="span"
-              repeat={Infinity}
-              cursor={true}
-              omitDeletionAnimation={true}
-            />
+            <motion.div 
+              className="chat-interface"
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.3 }}
+            >
+              <div className="chat-bubble">
+                <TypeAnimation
+                  sequence={[
+                    "Hello! I'm Gemini AI.",
+                    2000,
+                    "I can help with data analysis",
+                    2000,
+                    "Create visualizations",
+                    2000,
+                    "And much more...",
+                    2000,
+                  ]}
+                  wrapper="span"
+                  speed={50}
+                  style={{ display: 'inline-block' }}
+                  repeat={Infinity}
+                />
+              </div>
+            </motion.div>
           </div>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
-}
+};
 
 export default Homepage;
