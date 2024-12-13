@@ -9,8 +9,8 @@
 
 #### **Project Overview**
 You've just cloned a minimal setup template for creating a React 18 chat bot application. This project leverages Vite for development, ensuring fast code updates with Hot Module Replacement (HMR). It also includes ESLint rules to maintain code quality and consistency.
--**Gemini ai website:** [Gemini AI Chat](https://gemini-ai-930l.onrender.com/)
--**Youtube demo:** [The full-stack nature of the project (MERN stack)](https://www.youtube.com/watch?v=dv9UR1WHQX8)
+- **Gemini ai website:** [Gemini AI Chat](https://gemini-ai-930l.onrender.com/)
+- **Youtube demo:** [The full-stack nature of the project (MERN stack)](https://www.youtube.com/watch?v=dv9UR1WHQX8)
 
 
 ### Figma Design Prototype
