@@ -19,10 +19,13 @@
   content: "";
   position: absolute;
   inset: 0;
-  background-image: url('/orbital.png'), radial-gradient(circle at top right, 
-    rgba(33, 123, 254, 0.1),
-    rgba(104, 63, 234, 0.05),
-    transparent 70%);
+  background-image: url('/orbital.png'), 
+    radial-gradient(circle at top right, 
+      rgba(33, 123, 254, 0.2),
+      rgba(104, 63, 234, 0.15),
+      transparent 70%);
+  background-size: 200% 200%, 100% 100%;
+  animation: gradientFlow 15s ease infinite;
   z-index: 1;
 }
 
@@ -66,14 +69,25 @@
   display: inline-flex;
   align-items: center;
   padding: 0.8rem 1.5rem;
-  background: linear-gradient(135deg, #217bfe, #683FEA);
+  background: linear-gradient(135deg, #217bfe, #683FEA, #217bfe);
+  background-size: 200% 200%;
   border-radius: 12px;
   color: white;
   font-weight: 600;
-  transition: all 0.3s ease;
+  transition: all 0.3s ease, transform 0.1s ease;
   width: 100%;
   justify-content: center;
   max-width: 300px;
+  animation: gradientFlow 3s ease infinite;
+}
+
+.cta-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(104, 63, 234, 0.3);
+}
+
+.cta-button:active {
+  transform: translateY(1px);
 }
 
 .button-content {
@@ -103,12 +117,22 @@
 
 .feature-card {
   backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 20px;
   padding: 1.5rem;
   box-shadow: 
     0 10px 20px rgba(0, 0, 0, 0.08),
     0 0 0 1px rgba(0, 0, 0, 0.03);
   margin: 0 auto;
+  transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 
+    0 15px 30px rgba(0, 0, 0, 0.1),
+    0 0 0 1px rgba(0, 0, 0, 0.05);
 }
 
 .card-content {
@@ -136,12 +160,14 @@
 
 .chat-bubble {
   background: linear-gradient(135deg, #217bfe, #683FEA);
+  background-size: 200% 200%;
   padding: 0.8rem 1.2rem;
   border-radius: 12px;
   color: white;
   font-size: 0.9rem;
   line-height: 1.4;
   box-shadow: 0 4px 8px rgba(104, 63, 234, 0.15);
+  animation: gradientFlow 3s ease infinite, pulse 2s ease-in-out infinite;
 }
 
 .typing-text {
@@ -149,17 +175,29 @@
   min-height: 20px;
 }
 
+.typing-indicator {
+  display: inline-block;
+  width: 20px;
+  height: 10px;
+  margin-left: 5px;
+  background: linear-gradient(90deg, #fff 0%, #f0f0f0 50%, #fff 100%);
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite;
+  border-radius: 5px;
+}
+
 /* Responsive Design */
 @media (max-width: 1024px) {
   .homepage {
     flex-direction: column;
     gap: 2rem;
-    padding: 2rem 1rem;
+    padding: 4rem 2rem;
   }
 
   .left, .right {
-    max-width: 100%;
+    max-width: 600px;
     text-align: center;
+    margin: 0 auto;
   }
 
   .feature-card {
@@ -170,7 +208,7 @@
 
 @media (max-width: 640px) {
   .homepage {
-    padding: 1.5rem 1rem;
+    padding: 3rem 1.5rem;
   }
 
   .card-content {
@@ -192,6 +230,18 @@
     font-size: 0.85rem;
     padding: 0.6rem 1rem;
   }
+
+  .title {
+    font-size: clamp(2rem, 8vw, 3rem);
+  }
+
+  .subtitle {
+    font-size: clamp(1.2rem, 5vw, 1.5rem);
+  }
+
+  .description {
+    font-size: clamp(0.9rem, 4vw, 1.1rem);
+  }
 }
 
 /* Animations */
@@ -203,3 +253,20 @@
 .bot-image {
   animation: float 3s ease-in-out infinite;
 }
+
+@keyframes gradientFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -1000px 0; }
+  100% { background-position: 1000px 0; }
+}
+

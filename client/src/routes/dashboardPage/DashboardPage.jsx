@@ -1,7 +1,8 @@
 import React from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
-import { MessageSquare, Image, Code, ArrowRight } from "lucide-react";
+import { MessageSquare, Image, Code, ArrowRight, Plus } from 'lucide-react';
+import { motion } from "framer-motion";
 
 export default function DashboardPage() {
   const queryClient = useQueryClient();
@@ -33,25 +34,35 @@ export default function DashboardPage() {
     mutation.mutate(text);
   };
 
+  const options = [
+    { icon: MessageSquare, text: "Create a New Chat" },
+    { icon: Image, text: "Analyze Images" },
+    { icon: Code, text: "Help me with my Code" },
+  ];
+
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center p-4">
-      <div className="w-full max-w-4xl bg-white rounded-lg shadow-xl p-8">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="w-full max-w-4xl bg-white rounded-lg shadow-xl p-8"
+      >
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold text-blue-600">Gemini AI</h1>
+          <p className="text-gray-600 mt-2">Your intelligent assistant</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          {[
-            { icon: MessageSquare, text: "Create a New Chat" },
-            { icon: Image, text: "Analyze Images" },
-            { icon: Code, text: "Help me with my Code" },
-          ].map((option, index) => (
-            <div
+          {options.map((option, index) => (
+            <motion.div
               key={index}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               className="flex flex-col items-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer"
             >
               <option.icon className="w-12 h-12 text-blue-500 mb-2" />
               <span className="text-center font-medium">{option.text}</span>
-            </div>
+            </motion.div>
           ))}
         </div>
         <form onSubmit={handleSubmit} className="relative">
@@ -70,7 +81,8 @@ export default function DashboardPage() {
             <ArrowRight className="w-6 h-6" />
           </button>
         </form>
-      </div>
+      </motion.div>
     </div>
   );
 }
+

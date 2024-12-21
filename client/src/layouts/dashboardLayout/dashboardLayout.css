@@ -7,13 +7,11 @@
   width: 300px;
   background-color: #f4f4f4;
   border-right: 1px solid #ddd;
-  overflow-y: auto;
 }
 
 .content {
   flex: 1;
   padding: 20px;
-  overflow-y: auto;
 }
 
 @media (max-width: 768px) {
@@ -45,13 +43,11 @@
   width: 300px;
   background-color: #f4f4f4;
   border-right: 1px solid #ddd;
-  overflow-y: auto;
 }
 
 .content {
   flex: 1;
   padding: 20px;
-  overflow-y: auto;
 }
 
 @media (max-width: 768px) {

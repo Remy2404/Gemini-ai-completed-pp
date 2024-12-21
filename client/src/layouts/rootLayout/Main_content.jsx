@@ -1,253 +1,236 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-  CardFooter,
-} from "@/components/ui/card";
 import "./main.css";
-import {
-  BoltIcon,
-  CheckIcon,
-  CodeIcon,
-  HeadphonesIcon,
-  LightbulbIcon,
-  SettingsIcon,
-  ShieldIcon,
-  XIcon,
-} from "lucide-react";
+import { motion, useAnimation } from "framer-motion";
+import { BrainCircuit, Zap, Sliders, Lightbulb, Code2, ShieldCheck, ChevronRight, Check, X } from 'lucide-react';
 
-export default function Component() {
+const FeatureCard = ({ icon: Icon, title, description }) => (
+  <motion.div 
+    className="feature-card bg-white p-6 rounded-lg shadow-md"
+    whileHover={{ scale: 1.05 }}
+    transition={{ type: "spring", stiffness: 300 }}
+  >
+    <Icon className="w-12 h-12 text-blue-500 mb-4" />
+    <h3 className="text-xl font-semibold mb-2">{title}</h3>
+    <p className="text-gray-600">{description}</p>
+  </motion.div>
+);
+
+const PricingCard = ({ title, description, price, features, buttonText }) => (
+  <motion.div 
+    className="bg-white p-6 rounded-lg shadow-md"
+    whileHover={{ scale: 1.05 }}
+    transition={{ type: "spring", stiffness: 300 }}
+  >
+    <h3 className="text-2xl font-bold mb-2">{title}</h3>
+    <p className="text-gray-600 mb-4">{description}</p>
+    <div className="text-3xl font-bold mb-4">{price}</div>
+    <ul className="mb-6">
+      {features.map((feature, index) => (
+        <li key={index} className="flex items-center mb-2">
+          {feature.included ? (
+            <Check className="w-5 h-5 text-green-500 mr-2" />
+          ) : (
+            <X className="w-5 h-5 text-red-500 mr-2" />
+          )}
+          <span className={feature.included ? '' : 'line-through text-gray-400'}>
+            {feature.text}
+          </span>
+        </li>
+      ))}
+    </ul>
+    <Button>
+      {buttonText}
+    </Button>
+  </motion.div>
+);
+export default function MainContent() {
+  const [isHighContrast, setIsHighContrast] = useState(false);
+  const [visibleSections, setVisibleSections] = useState([]);
+
+  const controls = useAnimation();
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setVisibleSections((prev) => [...prev, entry.target.id]);
+            controls.start("visible");
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    document.querySelectorAll("section").forEach((section) => {
+      observer.observe(section);
+    });
+
+    return () => observer.disconnect();
+  }, [controls]);
+
+  const toggleHighContrast = () => {
+    setIsHighContrast(!isHighContrast);
+  };
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        type: "spring",
+        stiffness: 100
+      }
+    }
+  };
+
   return (
-    <div className="flex min-h-[100vh] flex-col w-full">
+    <div className={`flex min-h-[100vh] flex-col w-full ${isHighContrast ? 'high-contrast' : ''}`}>
       <div className="flex-grow">
-        <section
+        <motion.section
           id="features"
-          className="w-full py-16 md:py-24 bg-white"
+          className="w-full py-16 md:py-24 bg-gray-50"
+          initial="hidden"
+          animate={visibleSections.includes('features') ? "visible" : "hidden"}
+          variants={containerVariants}
         >
-          <div className="container">
+          <div className="container mx-auto px-4">
+            <motion.h2 
+              className="text-3xl font-bold text-center mb-12"
+              variants={itemVariants}
+            >
+              Our Features
+            </motion.h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              <div className="grid gap-4 items-start">
-                <BoltIcon className="w-10 h-10 text-sky-500" />
-                <h3 className="text-xl sm:text-2xl font-bold">Blazing Fast</h3>
-                <p className="text-base md:text-lg text-gray-600 max-w-2xl">
-                  Gemini AI responds instantly, so you can get the information
-                  you need in real-time.
-                </p>
-              </div>
-              <div className="grid gap-4 items-start">
-                <SettingsIcon className="w-10 h-10 text-sky-500" />
-                <h3 className="text-xl sm:text-2xl font-bold">
-                  Highly Customizable
-                </h3>
-                <p className="text-base md:text-lg text-gray-600 max-w-2xl">
-                  Tailor Gemini AI to your specific needs with a wide range of
-                  configuration options.
-                </p>
-              </div>
-              <div className="grid gap-4 items-start">
-                <LightbulbIcon className="w-10 h-10 text-sky-500" />
-                <h3 className="text-xl sm:text-2xl font-bold">
-                  Innovative Features
-                </h3>
-                <p className="text-base md:text-lg text-gray-600 max-w-2xl">
-                  Gemini AI is constantly evolving, with new features and
-                  capabilities added regularly.
-                </p>
-              </div>
-              <div className="grid gap-4 items-start">
-                <CodeIcon className="w-10 h-10 text-sky-500" />
-                <h3 className="text-xl sm:text-2xl font-bold">
-                  Developer Friendly
-                </h3>
-                <p className="text-base md:text-lg text-gray-600 max-w-2xl">
-                  Integrate Gemini AI seamlessly into your applications with our
-                  powerful API.
-                </p>
-              </div>
-              <div className="grid gap-4 items-start">
-                <ShieldIcon className="w-10 h-10 text-sky-500" />
-                <h3 className="text-xl sm:text-2xl font-bold">
-                  Secure and Private
-                </h3>
-                <p className="text-base md:text-lg text-gray-600 max-w-2xl">
-                  Your data is safe with Gemini AI, with industry-leading
-                  security and privacy measures.
-                </p>
-              </div>
-              <div className="grid gap-4 items-start">
-                <HeadphonesIcon className="w-10 h-10 text-sky-500" />
-                <h3 className="text-xl sm:text-2xl font-bold">
-                  Exceptional Support
-                </h3>
-                <p className="text-base md:text-lg text-gray-600 max-w-2xl">
-                  Our dedicated support team is here to help you get the most
-                  out of Gemini AI.
-                </p>
-              </div>
+              {[
+                { icon: BrainCircuit, title: "AI-Powered Insights", description: "Leverage advanced machine learning for deep, actionable insights." },
+                { icon: Zap, title: "Lightning Fast", description: "Get instant responses and process data at unprecedented speeds." },
+                { icon: Sliders, title: "Highly Customizable", description: "Tailor Gemini AI to your specific needs with flexible configuration options." },
+                { icon: Lightbulb, title: "Innovative Solutions", description: "Stay ahead with cutting-edge AI features and capabilities." },
+                { icon: Code2, title: "Developer Friendly", description: "Seamlessly integrate Gemini AI into your applications with our robust API." },
+                { icon: ShieldCheck, title: "Secure and Private", description: "Rest easy with our industry-leading security and privacy measures." },
+              ].map((feature, index) => (
+                <motion.div key={index} variants={itemVariants}>
+                  <FeatureCard {...feature} />
+                </motion.div>
+              ))}
             </div>
           </div>
-        </section>
-        <section className="w-full py-16 md:py-24 bg-gray-50">
-          <img src="/orbital.png" alt="bg" className="bg-img max-w-full h-auto" />
-          <div className="container">
-            <div className="grid gap-12 md:grid-cols-2">
-              <div>
-                <h2 className="text-2xl font-bold tracking-tight sm:text-4xl">
-                  Pricing
-                </h2>
-                <p className="mt-4 text-sm sm:text-base text-gray-500">
-                  Gemini AI offers flexible pricing plans to suit your needs.
-                  Choose the plan that works best for you and unlock the full
-                  potential of our AI assistant.
-                </p>
-                <div className="mt-8 grid gap-6">
-                  <Card className="w-full after:content-[''] after:block after:w-full after:h-[1px] after:bg-white after:mt-8 flex flex-col items-center justify-center">
-                    <CardHeader>
-                      <CardTitle>Free</CardTitle>
-                      <CardDescription className="font-mono font-semibold text-black">
-                        Get started with Gemini AI
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="flex items-baseline justify-center gap-2">
-                        <span className="text-3xl sm:text-4xl font-bold">
-                          $0
-                        </span>
-                        <span className="text-sm sm:text-base text-gray-500">
-                          /month
-                        </span>
-                      </div>
-                      <ul className="mt-6 space-y-4 text-sm sm:text-base text-black">
-                        <li className="flex items-center gap-2">
-                          <CheckIcon className="h-5 w-5 text-green-500 flex-shrink-0" />
-                          <span>100 chat prompts per month</span>
-                        </li>
-                        <li className="flex items-center gap-2">
-                          <CheckIcon className="h-5 w-5 text-green-500 flex-shrink-0" />
-                          <span>Basic AI capabilities</span>
-                        </li>
-                        <li className="flex items-center gap-2">
-                          <XIcon className="h-5 w-5 text-red-500 flex-shrink-0" />
-                          <span className="line-through text-red-500">
-                            No advanced features
-                          </span>
-                        </li>
-                      </ul>
-                    </CardContent>
-                    <CardFooter>
-                      <Button className="w-full bg-sky-500">Sign Up</Button>
-                    </CardFooter>
-                  </Card>
-                  <Card className="w-full after:content-[''] after:block after:w-full after:h-[1px] after:bg-white after:mt-8 flex flex-col items-center justify-center">
-                    <CardHeader>
-                      <CardTitle className="font-bold">Pro</CardTitle>
-                      <CardDescription className="font-mono font-semibold text-black text-center">
-                        Unlock the full potential of Gemini AI
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="flex items-baseline justify-center gap-2">
-                        <span className="text-3xl sm:text-4xl font-bold">
-                          $19
-                        </span>
-                        <span className="text-sm sm:text-base text-black">
-                          /month
-                        </span>
-                      </div>
-                      <ul className="mt-6 space-y-4 text-sm sm:text-base text-black">
-                        <li className="flex items-center gap-2">
-                          <CheckIcon className="h-5 w-5 text-green-500 flex-shrink-0" />
-                          <span>Unlimited chat prompts</span>
-                        </li>
-                        <li className="flex items-center gap-2">
-                          <CheckIcon className="h-5 w-5 text-green-500 flex-shrink-0" />
-                          <span>Advanced AI capabilities</span>
-                        </li>
-                        <li className="flex items-center gap-2">
-                          <CheckIcon className="h-5 w-5 text-green-500 flex-shrink-0" />
-                          <span>Priority support</span>
-                        </li>
-                      </ul>
-                    </CardContent>
-                    <CardFooter>
-                      <Button className="w-full bg-sky-500">Subscribe</Button>
-                    </CardFooter>
-                  </Card>
-                </div>
-              </div>
-              <div className="flex items-center justify-center mt-12 lg:mt-0">
-                <div className="card w-full max-w-md">
-                  <img
-                    src="/bot_love.png"
-                    alt="ailogo"
-                    className="w-full h-auto"
-                  />
-                  <div className="card__content">
-                    <p className="card__title font-semibold text-lg sm:text-xl">
-                      ABOUT Gemini AI
-                    </p>
-                    <p className="card__description font-serif text-sm sm:text-base">
-                      Gemini AI is a cutting-edge conversational AI assistant
-                      developed by a team of experts in natural language
-                      processing and machine learning. Our mission is to empower
-                      individuals and businesses with the tools they need to
-                      thrive in the digital age. We believe that AI should be
-                      accessible, transparent, and beneficial to all. That's why
-                      we've built Gemini AI with a focus on user-friendliness,
-                      ethical principles, and continuous improvement.
-                    </p>
-                  </div>
-                </div>
-              </div>
+        </motion.section>
+        <motion.section 
+          id="pricing" 
+          className="w-full py-16 md:py-24 bg-white"
+          initial="hidden"
+          animate={visibleSections.includes('pricing') ? "visible" : "hidden"}
+          variants={containerVariants}
+        >
+          <img src="/orbital.png" alt="" className="bg-img max-w-full h-auto" aria-hidden="true" />
+          <div className="container mx-auto px-4">
+            <motion.h2 
+              className="text-3xl font-bold text-center mb-12"
+              variants={itemVariants}
+            >
+              Flexible Pricing for Every Need
+            </motion.h2>
+            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+              {[
+                {
+                  title: "Starter",
+                  description: "Perfect for individuals and small projects",
+                  price: "$0 / month",
+                  features: [
+                    { text: "100 AI queries per month", included: true },
+                    { text: "Basic AI capabilities", included: true },
+                    { text: "Community support", included: true },
+                    { text: "Advanced features", included: false },
+                  ],
+                  buttonText: "Get Started",
+                },
+                {
+                  title: "Pro",
+                  description: "Ideal for growing businesses and teams",
+                  price: "$49 / month",
+                  features: [
+                    { text: "Unlimited AI queries", included: true },
+                    { text: "Advanced AI capabilities", included: true },
+                    { text: "Priority support", included: true },
+                    { text: "API access", included: true },
+                  ],
+                  buttonText: "Upgrade to Pro",
+                },
+                {
+                  title: "Enterprise",
+                  description: "Custom solutions for large organizations",
+                  price: "Custom",
+                  features: [
+                    { text: "Unlimited AI queries", included: true },
+                    { text: "Full suite of AI tools", included: true },
+                    { text: "Dedicated support team", included: true },
+                    { text: "Custom integrations", included: true },
+                  ],
+                  buttonText: "Contact Sales",
+                },
+              ].map((plan, index) => (
+                <motion.div key={index} variants={itemVariants}>
+                  <PricingCard {...plan} />
+                </motion.div>
+              ))}
             </div>
           </div>
-        </section>
-        <section
+        </motion.section>
+        <motion.section
           id="contact"
           className="w-full py-16 md:py-24 bg-gray-50"
+          initial="hidden"
+          animate={visibleSections.includes('contact') ? "visible" : "hidden"}
+          variants={containerVariants}
         >
-          <div className="container">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-              <div className="space-y-4">
-                <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-6">
-                  Get in Touch
-                </h2>
-                <p className="text-blue-400 max-w-[600px] text md:text-xl-sm sm:text-base ">
-                  Have a question or want to learn more? Reach out to our team,
-                  and we'll get back to you as soon as possible.
-                </p>
-              </div>
-              <form className="text-neutral-800 py-6 relative overflow-hidden flex flex-col justify-around w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl h-auto sm:h-44 border border-neutral-500 rounded-lg bg-neutral-50 p-3 px-6">
-                <div className="before:absolute before:w-32 before:h-20 before:right-2 before:bg-rose-300 before:-z-10 before:rounded-full before:blur-xl before:-top-12 z-10 after:absolute after:w-24 after:h-24 after:bg-purple-300 after:-z-10 after:rounded-full after:blur after:-top-12 after:-right-6">
-                  <span className="font-extrabold text-xl sm:text-2xl text-violet-600">
-                    Get more updates...
-                  </span>
-                  <div className="text-neutral-700 text-sm sm:text-base">
-                    Sign up for our newsletter and you'll be the first to find
-                    out about new features
-                  </div>
-                </div>
-                <div className="flex flex-col sm:flex-row gap-2 sm:gap-1 mt-4 sm:mt-0">
-                  <div className="relative rounded-lg w-full sm:w-64 overflow-hidden before:absolute before:w-12 before:h-12 before:content[''] before:right-0 before:bg-violet-500 before:rounded-full before:blur-lg after:absolute after:z-10 after:w-20 after:h-20 after:content[''] after:bg-rose-300 after:right-12 after:top-3 after:rounded-full after:blur-lg">
-                    <input
-                      type="text"
-                      className="relative bg-transparent ring-0 outline-none border border-neutral-500 text-neutral-900 placeholder-violet-700 text-sm rounded-lg focus:ring-violet-500 placeholder-opacity-60 focus:border-violet-500 block w-full p-2.5 checked:bg-emerald-500"
-                      placeholder="Mail..."
-                    />
-                  </div>
-                  <button className="bg-violet-500 text-neutral-50 p-2 rounded-lg hover:bg-violet-400 w-full sm:w-auto mt-2 sm:mt-0">
-                    Subscribe
-                  </button>
-                </div>
+          <div className="container mx-auto px-4">
+            <motion.div 
+              className="max-w-md mx-auto text-center"
+              variants={itemVariants}
+            >
+              <h2 className="text-3xl font-bold mb-4">Get in Touch</h2>
+              <p className="text-gray-600 mb-8">
+                Have questions or ready to get started? Our team is here to help you harness the power of AI.
+              </p>
+              <form className="space-y-4">
+                <input
+                  type="email"
+                  placeholder="Your email"
+                  className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  required
+                />
+                <textarea
+                  placeholder="Your message"
+                  rows="4"
+                  className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  required
+                ></textarea>
+                <Button 
+                  type="submit" 
+                  className="w-full button-animation bg-blue-500 hover:bg-blue-600 text-white"
+                >
+                  Send Message <ChevronRight className="ml-2" />
+                </Button>
               </form>
-            </div>
+            </motion.div>
           </div>
-        </section>
+        </motion.section>
       </div>
     </div>
   );
 }
+

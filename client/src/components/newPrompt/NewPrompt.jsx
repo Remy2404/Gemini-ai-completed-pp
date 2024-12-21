@@ -108,18 +108,18 @@ export default function NewPrompt({ data }) {
 
   return (
     <div className="flex flex-col space-y-4">
-      {img.isLoading && (
-        <div className="text-center text-gray-500">Loading...</div>
-      )}
-      {img.dbData?.filePath && (
-        <div className="flex justify-center">
-          <IKImage
-            urlEndpoint={import.meta.env.VITE_IMAGE_KIT_ENDPOINT}
-            path={img.dbData.filePath}
+      {img.isLoading ? (
+        <div className="w-full flex justify-center my-4">
+          <div className="animate-pulse bg-gray-200 rounded-lg w-[300px] h-[300px]"></div>
+        </div>
+      ) : img.dbData?.filePath && (
+        <div className="w-full flex justify-center my-4">
+          <img
+            src={img.dbData.filePath}
             width="300"
             height="300"
-            transformation={[{ width: 300, height: 300, cropMode: 'maintain_ratio' }]}
             className="rounded-lg shadow-md border-2 border-gray-300 object-cover"
+            alt="Uploaded image"
           />
         </div>
       )}
@@ -158,8 +158,9 @@ export default function NewPrompt({ data }) {
               const reader = new FileReader();
               reader.onloadend = () => {
                 setImg({
-                  ...img,
                   isLoading: true,
+                  error: "",
+                  dbData: { filePath: URL.createObjectURL(file) },
                   aiData: {
                     inlineData: {
                       data: reader.result.split(",")[1],
@@ -167,13 +168,17 @@ export default function NewPrompt({ data }) {
                     },
                   },
                 });
+                setImg(prev => ({
+                  ...prev,
+                  isLoading: false
+                }));
               };
               reader.readAsDataURL(file);
             }
           }}
         />
         <input
-          type="text"
+          type="text"          
           name="text"
           placeholder="Ask anything..."
           className="flex-grow p-2 text-gray-800 bg-transparent focus:outline-none"

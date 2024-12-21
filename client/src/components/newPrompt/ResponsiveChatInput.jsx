@@ -1,233 +1,90 @@
-import React, { useState, useRef } from 'react';
-import { Send, Paperclip } from 'lucide-react';
-import Upload from "../upload/Upload";
+import React, { useState, useRef, useEffect } from 'react';
+import { Send, Paperclip, X, File } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import Upload from '../upload/Upload';
 
-export default function ResponsiveChatInput() {
+export default function ResponsiveChatInput({ onSendMessage }) {
   const [message, setMessage] = useState('');
-  const [attachment, setAttachment] = useState(null);
-  const [img, setImg] = useState(null);
-  const fileInputRef = useRef(null);
-  const endRef = useRef(null);
-  const formRef = useRef(null);
+  const [files, setFiles] = useState([]);
+  const textareaRef = useRef(null);
+
+  useEffect(() => {
+    if (textareaRef.current) {
+      textareaRef.current.style.height = 'auto';
+      textareaRef.current.style.height = `${Math.min(textareaRef.current.scrollHeight, 100)}px`;
+    }
+  }, [message]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (message.trim() || attachment || img) {
-      console.log('Sending message:', message);
-      console.log('Attachment:', attachment);
-      console.log('Uploaded image:', img);
+    if (message.trim() || files.length > 0) {
+      onSendMessage(message, files);
       setMessage('');
-      setAttachment(null);
-      setImg(null);
+      setFiles([]);
     }
   };
 
-  const handleFileChange = (e) => {
-    if (e.target.files && e.target.files[0]) {
-      setAttachment(e.target.files[0]);
-    }
+  const handleFileChange = (newFiles) => {
+    setFiles((prevFiles) => [...prevFiles, ...newFiles]);
+  };
+
+  const removeFile = (index) => {
+    setFiles((prevFiles) => prevFiles.filter((_, i) => i !== index));
   };
 
   return (
-    <div className="chat-input-container">
-      <form onSubmit={handleSubmit} className="chat-form">
-        <button
-          type="button"
-          className="attachment-button"
-          onClick={() => fileInputRef.current?.click()}
-        >
-          <Paperclip size={20} />
-        </button>
-        <input
-          type="file"
-          ref={fileInputRef}
-          onChange={handleFileChange}
-          style={{ display: 'none' }}
-        />
-        <textarea
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          placeholder="Type a message..."
-          className="chat-textarea"
-        />
-        <button type="submit" className="send-button" disabled={!message.trim() && !attachment && !img}>
-          <Send size={20} />
-        </button>
-      </form>
-      {attachment && (
-        <div className="attachment-info">
-          Attached: {attachment.name}
-        </div>
-      )}
-      
-      {/* Additional Form */}
-      <div className="endChat" ref={endRef}></div>
-      <form className="newForm" onSubmit={handleSubmit} ref={formRef}>
-        <Upload setImg={setImg} />
-        <input id="file" type="file" multiple={false} hidden />
-        <input type="text" name="text" placeholder="Ask anything..." />
-        <button>
-          <img src="/arrow.png" className="arrow" alt="arrow" />
-        </button>
-      </form>
-
-      <style jsx>{`
-        .chat-input-container {
-          max-width: 800px;
-          margin: 0 auto;
-          padding: 16px;
-        }
-
-        .chat-form,
-        .newForm {
-          display: flex;
-          align-items: flex-end;
-          background-color: #ffffff;
-          border: 1px solid #e0e0e0;
-          border-radius: 8px;
-          overflow: hidden;
-          transition: all 0.3s ease;
-        }
-
-        .chat-textarea {
-          flex-grow: 1;
-          border: none;
-          outline: none;
-          padding: 12px 16px;
-          font-size: 16px;
-          resize: none;
-          min-height: 40px;
-          max-height: 120px;
-          font-family: inherit;
-        }
-
-        .attachment-button,
-        .send-button,
-        .newForm button {
-          background: none;
-          border: none;
-          cursor: pointer;
-          padding: 12px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          transition: background-color 0.3s ease;
-        }
-
-        .attachment-button {
-          color: #718096;
-        }
-
-        .send-button {
-          color: #2b6cb0;
-        }
-
-        .send-button:disabled {
-          color: #cbd5e0;
-          cursor: not-allowed;
-        }
-
-        .attachment-button:hover,
-        .send-button:hover:not(:disabled),
-        .newForm button:hover {
-          background-color: #f7fafc;
-        }
-
-        .attachment-info {
-          margin-top: 8px;
-          font-size: 14px;
-          color: #718096;
-        }
-
-        .newForm input[type="text"] {
-          flex-grow: 1;
-          border: none;
-          outline: none;
-          padding: 12px;
-          font-size: 16px;
-          font-family: inherit;
-        }
-
-        .newForm button img.arrow {
-          width: 20px;
-          height: 20px;
-        }
-
-        /* Media Queries */
-        @media (max-width: 639px) {
-          .chat-input-container {
-            padding: 8px;
-          }
-
-          .chat-form,
-          .newForm {
-            flex-direction: column;
-            align-items: stretch;
-          }
-
-          .chat-textarea {
-            border-bottom: 1px solid #e0e0e0;
-          }
-
-          .attachment-button,
-          .send-button,
-          .newForm button {
-            padding: 8px;
-          }
-        }
-
-        @media (min-width: 640px) and (max-width: 767px) {
-          .chat-input-container {
-            padding: 12px;
-          }
-        }
-
-        @media (min-width: 768px) and (max-width: 1023px) {
-          .chat-input-container {
-            padding: 16px;
-          }
-
-          .chat-textarea {
-            font-size: 15px;
-          }
-        }
-
-        @media (min-width: 1024px) and (max-width: 1279px) {
-          .chat-input-container {
-            padding: 20px;
-          }
-
-          .chat-form,
-          .newForm {
-            border-radius: 12px;
-          }
-        }
-
-        @media (min-width: 1280px) and (max-width: 1535px) {
-          .chat-input-container {
-            padding: 24px;
-          }
-
-          .chat-textarea {
-            font-size: 17px;
-          }
-        }
-
-        @media (min-width: 1536px) {
-          .chat-input-container {
-            padding: 28px;
-          }
-
-          .chat-form,
-          .newForm {
-            border-radius: 16px;
-          }
-
-          .chat-textarea {
-            font-size: 18px;
-          }
-        }
-      `}</style>
+    <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-2 sm:p-4">
+      <div className="max-w-4xl mx-auto">
+        <AnimatePresence>
+          {files.length > 0 && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 20 }}
+              className="mb-2 flex flex-wrap gap-2 max-h-24 overflow-y-auto"
+            >
+              {files.map((file, index) => (
+                <div key={index} className="bg-gray-100 rounded-full py-1 px-3 flex items-center text-sm">
+                  <File size={14} className="text-gray-500 mr-1" />
+                  <span className="truncate max-w-[100px]">{file.name}</span>
+                  <button
+                    onClick={() => removeFile(index)}
+                    className="ml-1 text-gray-500 hover:text-red-500 focus:outline-none"
+                  >
+                    <X size={14} />
+                  </button>
+                </div>
+              ))}
+            </motion.div>
+          )}
+        </AnimatePresence>
+        <form onSubmit={handleSubmit} className="flex items-end space-x-2">
+          <Upload onFileSelect={handleFileChange}>
+            <button
+              type="button"
+              className="p-2 text-gray-500 hover:text-gray-700 focus:outline-none"
+            >
+              <Paperclip size={20} />
+            </button>
+          </Upload>
+          <textarea
+            ref={textareaRef}
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            placeholder="Ask a question..."
+            className="flex-grow p-2 border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base"
+            rows={1}
+          />
+          <button
+            type="submit"
+            className="p-2 bg-blue-500 text-white rounded-full hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300 disabled:opacity-50 disabled:cursor-not-allowed"
+            disabled={!message.trim() && files.length === 0}
+          >
+            <Send size={20} />
+          </button>
+        </form>
+      </div>
     </div>
   );
 }
+
