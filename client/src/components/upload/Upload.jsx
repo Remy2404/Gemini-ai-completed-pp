@@ -1,18 +1,16 @@
 import React, { useRef } from 'react';
 import { IKContext, IKUpload } from "imagekitio-react";
-import { FileIcon, defaultStyles } from 'react-file-icon';
+import { FaFilePdf, FaFileImage, FaFileWord } from 'react-icons/fa';
 
 const urlEndpoint = import.meta.env.VITE_IMAGE_KIT_ENDPOINT;
 const publicKey = import.meta.env.VITE_IMAGE_KIT_PUBLIC_KEY;
 
 const fileTypes = {
-  'image/jpeg': { color: '#FFB13B', extension: 'jpg' },
-  'image/png': { color: '#87C6F5', extension: 'png' },
-  'application/pdf': { color: '#F15642', extension: 'pdf' },
-  'text/plain': { color: '#89D9E2', extension: 'txt' },
-  'application/vnd.openxmlformats-officedocument.wordprocessingml.document': { color: '#4A8CFF', extension: 'docx' },
-  'application/x-python-code': { color: '#4B8BBE', extension: 'py' },
-  'text/x-java': { color: '#5382A1', extension: 'java' },
+  'image/jpeg': <FaFileImage color="#FFB13B" />,
+  'image/png': <FaFileImage color="#87C6F5" />,
+  'application/pdf': <FaFilePdf color="#F15642" />,
+  'application/vnd.openxmlformats-officedocument.wordprocessingml.document': <FaFileWord color="#4A8CFF" />,
+  // Add more as needed
 };
 
 const authenticator = async () => {
@@ -91,16 +89,12 @@ const Upload = ({ setImg }) => {
 };
 
 export function FilePreview({ file }) {
-  const fileType = fileTypes[file.type] || { color: '#CCCCCC', extension: 'unknown' };
+  const fileType = fileTypes[file.type] || <FaFilePdf color="#000000" />;
 
   return (
     <div className="flex items-center space-x-2 p-2 bg-gray-100 rounded-lg">
       <div className="w-8 h-8">
-        <FileIcon
-          extension={fileType.extension}
-          {...defaultStyles[fileType.extension]}
-          color={fileType.color}
-        />
+        {fileType}
       </div>
       <span className="text-sm truncate max-w-xs">{file.name}</span>
     </div>
