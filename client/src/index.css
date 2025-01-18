@@ -18,13 +18,15 @@ body, #root {
   min-height:fit-content;
   width:auto;
   overflow-x: hidden;
-  overflow-y: hidden;
 }
 
 .container {
   max-width: 1280px;
   margin: 0 auto;
   padding: 0 1rem;
+}
+.rootLayout {
+  overflow-y: hidden;
 }
 
 /* Better responsive containers */
